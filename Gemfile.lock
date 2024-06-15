@@ -310,7 +310,6 @@ PLATFORMS
   x86-linux-gnu
   x86-linux-musl
   x86_64-darwin
-  x86_64-linux
   x86_64-linux-gnu
   x86_64-linux-musl
 
@@ -343,4 +342,4 @@ RUBY VERSION
    ruby 3.1.2p20
 
 BUNDLED WITH
-   2.5.10
+   2.5.13
