@@ -1,0 +1,2 @@
+class HabitStaticsController < ApplicationController
+end

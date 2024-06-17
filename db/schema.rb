@@ -10,9 +10,44 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_15_152734) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_17_183226) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "habit_statics", force: :cascade do |t|
+    t.bigint "habit_id", null: false
+    t.integer "total_occurrences"
+    t.integer "completed_occurrences"
+    t.integer "missed_occurrences"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["habit_id"], name: "index_habit_statics_on_habit_id"
+  end
+
+  create_table "habits", force: :cascade do |t|
+    t.string "name"
+    t.integer "priority"
+    t.date "start_date"
+    t.date "end_date"
+    t.time "reminder"
+    t.string "frequency"
+    t.string "status"
+    t.string "category"
+    t.bigint "user_id", null: false
+    t.string "days_of_week"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_habits_on_user_id"
+  end
+
+  create_table "occurrences", force: :cascade do |t|
+    t.string "completion_status"
+    t.date "date"
+    t.bigint "habit_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["habit_id"], name: "index_occurrences_on_habit_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -22,8 +57,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_15_152734) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "first_name"
+    t.string "last_name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "habit_statics", "habits"
+  add_foreign_key "habits", "users"
+  add_foreign_key "occurrences", "habits"
 end
