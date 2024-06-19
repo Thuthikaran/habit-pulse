@@ -13,6 +13,12 @@
   <body><%= render "shared/navbar" %>
   <%= render "shared/flashes" %>
 
-    <%= yield %>
+    <div class="left">
+      <p>this is the left side of the page</p>
+    </div>
+    
+    <div class="right">
+         <%= yield %>
+    </div>
   </body>
 </html>
