@@ -1,24 +1,43 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>HabitPulse</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
-  </head>
-
-  <body><%= render "shared/navbar" %>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HabitPulse</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_importmap_tags %>
+  <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
+</head>
+<body>
+  <%= render "shared/navbar" %>
   <%= render "shared/flashes" %>
 
-    <div class="left">
-      <p>this is the left side of the page</p>
-    </div>
-    
-    <div class="right">
-         <%= yield %>
-    </div>
-  </body>
+  <div class="container mt-5 text-left">
+    <aside class="sidebar">
+      <div class="profile-image-placeholder"></div>
+      <h3>@username</h3>
+      <div class="mt-3">
+      <button type="button">New Habit</button>
+      </div>
+      <div class="mt-3">
+      <button type="button">View All Habits</button>
+      </div>
+      <h5 class="mt-3">Share on</h5>
+      <ul class="social-links">
+        <li><a href="#">Facebook</a></li>
+        <li><a href="#">Twitter</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">WhatsApp</a></li>
+        <li><a href="#">Pinterest</a></li>
+        <li><a href="#">Snapchat</a></li>
+        <li><a href="#">TikTok</a></li>
+      </ul>
+    </aside>
+    <main class="content">
+      <%= yield %>
+    </main>
+  </div>
+</body>
 </html>
