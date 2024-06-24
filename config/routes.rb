@@ -10,4 +10,5 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   resources :habits, only: %i[index]
+  get 'create', to:'habits#new'
 end
