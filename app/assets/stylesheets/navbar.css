@@ -1,0 +1,57 @@
+.nav-button {
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .nav-button:hover {
+    background-color: darkblue;
+  }
+
+  .home-button {
+        background-color: lightgreen;
+        color: white;
+        border: none;
+        padding: 15px 30px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 24px;
+        margin: 10px 2px;
+        cursor: pointer;
+        border-radius: 8px;
+        font-family: 'Brush Script MT', cursive; /* Make sure the font is available or link to it in HTML */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s ease;
+      }
+      
+      .home-button:hover {
+        background-color: darkgreen;
+      }
+      
+      @media (max-width: 768px) {
+        .big-green-button {
+          font-size: 20px;
+          padding: 12px 24px;
+        }
+      }
+
+      /* app/assets/stylesheets/application.css or your custom CSS file */
+
+body {
+    background-color: lightblue;
+  }
+  
+
+  
+
+  
+  
