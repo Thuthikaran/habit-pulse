@@ -10,15 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_22_130709) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_24_191255) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "habit_statics", force: :cascade do |t|
     t.bigint "habit_id", null: false
-    t.integer "total_occurrences"
-    t.integer "completed_occurrences"
-    t.integer "missed_occurrences"
+    t.integer "total_occurrences", default: 0
+    t.integer "completed_occurrences", default: 0
+    t.integer "missed_occurrences", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["habit_id"], name: "index_habit_statics_on_habit_id"
