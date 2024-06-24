@@ -14,8 +14,11 @@ if Rails.env.development?
 end
 def create_occurrences(habit)
   rand(1..5).times do
-    habit.occurrences.create!(date: Faker::Date.between(from: 1.year.ago, to: Date.today),
-                              completion_status: ['completed', 'missed'].sample)
+    # create or update occurrence by date
+    occurrence = habit.occurrences.find_or_initialize_by(date: Faker::Date.between(from: habit.start_date,
+                                                                                   to: Date.today))
+    occurrence.completion_status = Occurrence::COMPLETION_STATUSES.sample
+    occurrence.save!
   end
 end
 
@@ -116,7 +119,7 @@ Habit.create!(
   category: 'Health'
 )
 
-Habit.create!(
+habit = Habit.create!(
   name: 'Take a cold shower',
   priority: rand(1..3),
   start_date: Faker::Date.between(from: 1.year.ago, to: Date.today),

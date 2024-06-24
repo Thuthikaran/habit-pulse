@@ -15,4 +15,33 @@ class Habit < ApplicationRecord
 
 
   has_many :occurrences, dependent: :destroy
+  has_one :habit_static, dependent: :destroy
+
+  # callback to create a habit_statics record when a habit is created
+  after_create :create_habit_statics
+
+  # callback to create occurrences for a habit based on frequency, between start_date and end_date, if end_date is nil then it is set to 1 year from start_date
+  after_create :create_occurrences
+
+  private
+
+  def create_occurrences
+    end_date = self.end_date || self.start_date + 1.year
+    if self.frequency == 'daily'
+      (self.start_date..end_date).each do |date|
+        self.occurrences.create(date: date)
+      end
+    elsif self.frequency == 'weekly'
+      (self.start_date..end_date).each do |date|
+        if self.days_of_week.include?(date.strftime('%A'))
+          self.occurrences.create(date: date)
+        end
+      end
+    end
+  end
+
+  def create_habit_statics
+    HabitStatic.create(habit_id: self.id)
+  end
+
 end
