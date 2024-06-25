@@ -1,29 +1,17 @@
-<%= form_with(class: "p-4") do |form| %>
-  <div class="mb-4">
-    <h1 class="mb-4">Create a habit</h1>
-  </div>
-  <div class="mb-3">
-    <label for="habit" class="form-label">Habit</label>
-    <%= text_field_tag :habit, "", class: "form-control" %>
-  </div>
-  <div class="mb-3">
-    <label for="category" class="form-label">Category</label>
-    <%= text_field_tag :category, "", class: "form-control" %>
-  </div>
-  <div class="mb-3">
-    <label for="frequency" class="form-label">Frequency</label>
-    <%= text_field_tag :frequency, "", class: "form-control" %>
-  </div>
-  <div class="mb-3">
-    <label for="reminder" class="form-label">Reminder</label>
-    <%= time_field_tag :reminder, "20:34", class: "form-control" %>
-  </div>
-  <div class="mb-3">
-    <label for="description" class="form-label">Description</label>
-    <%= text_area_tag :description, "", class: "form-control" %>
-  </div>
-  <div class="d-flex justify-content-between">
-    <%= button_tag "Cancel", type: :reset, class: "btn btn-secondary" %>
-    <%= submit_tag "Submit", class: "btn btn-primary" %>
-  </div>
+
+
+
+
+<%= simple_form_for(@habit) do |f| %>
+  <%= f.input :name %>
+  <%= f.input :priority %>
+  <%= f.input :start_date %>
+  <%= f.input :end_date %>
+  <%= f.input :reminder %>
+  <%= f.input :frequency %>
+  <%= f.input :status %>
+  <%= f.input :category %>
+  <%= f.input :days_of_week %>
+
+  <%= f.submit %>
 <% end %>
