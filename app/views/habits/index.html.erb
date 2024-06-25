@@ -1,1 +1,8 @@
-<h1>Today's habits</h1>
+<% Habit.all.each do |habit| %>
+  <div id="habit-<%= habit.id %>">
+    <p>Name: <%= habit.name %></p>
+    <small>Category: <%= habit.category %></small>
+    <button class="complete-btn" data-habit-id="<%= habit.id %>">Complete</button>
+  </div>
+<% end %>
+
