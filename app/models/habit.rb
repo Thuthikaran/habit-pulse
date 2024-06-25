@@ -1,8 +1,7 @@
-FREQUENCIES = %w[daily weekly].freeze
-STATUSES = %w[active inactive].freeze
-CATEGORIES = %w[Health Creativity Learning Mindfulness].freeze
-
 class Habit < ApplicationRecord
+  FREQUENCIES = %w[daily weekly].freeze
+  STATUSES = %w[active inactive].freeze
+  CATEGORIES = %w[Health Creativity Learning Mindfulness].freeze
   belongs_to :user
   validates :name, presence: true, length: { minimum: 3, maximum: 50 }, uniqueness: { scope: :user_id }
   # restrict priority to 1-3

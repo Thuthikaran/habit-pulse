@@ -11,6 +11,9 @@ class HabitsController < ApplicationController
   def create
 
     @habit = Habit.new(habit_params)
+    @habit.status = 'active'
+    @habit.frequency = 'daily'
+    @habit.start_date = Date.today
     @habit.user = current_user
     if @habit.save
       redirect_to habits_path, notice: 'Habit was successfully created.'

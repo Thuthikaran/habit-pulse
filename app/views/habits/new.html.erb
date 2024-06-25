@@ -4,13 +4,11 @@
 
 <%= simple_form_for(@habit) do |f| %>
   <%= f.input :name %>
-  <%= f.input :priority %>
-  <%= f.input :start_date %>
-  <%= f.input :end_date %>
+  <%= f.input :priority, collection: [1,2,3] %>
+
   <%= f.input :reminder %>
-  <%= f.input :frequency %>
-  <%= f.input :status %>
-  <%= f.input :category %>
+
+  <%= f.input :category, collection: Habit::CATEGORIES  %>
   <%= f.input :days_of_week %>
 
   <%= f.submit %>
