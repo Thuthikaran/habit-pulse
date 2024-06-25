@@ -1,8 +1,25 @@
-<% Habit.all.each do |habit| %>
-  <div id="habit-<%= habit.id %>">
-    <p>Name: <%= habit.name %></p>
-    <small>Category: <%= habit.category %></small>
-    <button class="complete-btn" data-habit-id="<%= habit.id %>">Complete</button>
+<div class="container mt-5">
+  <div class="row">
+    <% Habit.all.each do |habit| %>
+      <div class="col-12 mb-3">
+        <div class="card border-0 shadow-sm" id="habit-<%= habit.id %>">
+          <div class="card-body d-flex align-items-center justify-content-between">
+            <h5 class="card-title mb-1"><%= habit.name %></h5>
+            <div class="d-flex align-items-center">
+              <button class="btn btn-outline-primary complete-btn mr-2" data-habit-id="<%= habit.id %>">Complete</button>
+              <div class="dropdown">
+                <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton<%= habit.id %>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="bi bi-three-dots"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton<%= habit.id %>">
+                  <a class="dropdown-item" href="#">Edit</a>
+                  <a class="dropdown-item" href="#">Delete</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
   </div>
-<% end %>
-
+</div>
