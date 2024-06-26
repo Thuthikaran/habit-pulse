@@ -1,7 +1,10 @@
 class HabitsController < ApplicationController
 
   def index
-    @habits = Habit.all
+    # get habits that have occurrences for today
+    @habits = current_user.habits.select { |habit| habit.today_occurrence.present? }
+
+
   end
 
   def new
