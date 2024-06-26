@@ -24,6 +24,11 @@ class Habit < ApplicationRecord
   # callback to create occurrences for a habit based on frequency, between start_date and end_date, if end_date is nil then it is set to 1 year from start_date
   after_create :create_occurrences
 
+  # get today's occurrence
+  def today_occurrence
+    occurrences.find_by(date: Date.today)
+  end
+
   private
 
   def create_occurrences
