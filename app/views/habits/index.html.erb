@@ -1,1 +1,20 @@
+<<<<<<< Updated upstream
 <h1>Today's habits</h1>
+=======
+<% Habit.all.each do |habit| %>
+  <div id="habit-<%= habit.id %>">
+    <p>Name: <%= habit.name %></p>
+    <small>Category: <%= habit.category %></small>
+    <button class="complete-btn" data-habit-id="<%= habit.id %>">Complete</button>
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton<%= habit.id %>" data-bs-toggle="dropdown" aria-expanded="false">
+        Actions
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton<%= habit.id %>">
+        <li><%= link_to 'Edit', edit_habit_path(habit), class: "dropdown-item" %></li>
+        <li><%= link_to "Delete",habit_path(habit),data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%></li>
+      </ul>
+    </div>
+  </div>
+  <% end %>
+>>>>>>> Stashed changes

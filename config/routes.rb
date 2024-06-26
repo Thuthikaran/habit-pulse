@@ -9,7 +9,15 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+<<<<<<< Updated upstream
   resources :habits, only: %i[index]
+=======
+
+  resources :habits, only: %i[index new create]
+  resources :habit_statics, only: %i[show]
+  resources :habits, only: [:edit, :destroy]
+
+>>>>>>> Stashed changes
   get 'contact', to: 'pages#contact'
 get 'about', to: 'pages#about'
 
