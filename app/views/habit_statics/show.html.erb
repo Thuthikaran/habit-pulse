@@ -2,19 +2,19 @@
 
 <div class="row g-3">
   <div class="col-md-6">
-    <div class="border">
+    <div class="border border-black p-3">
       <div class="text-body-secundary">complete</div>
       <h3> <%= @habit_static.completed_occurrences || 0 %> days</h3>
     </div>
   </div>
   <div class="col-md-6">
-    <div class="border">
+    <div class="border border-black p-3">
       <div class="text-body-secundary">missed</div>
       <h3> <%= @habit_static.missed_occurrences %> days</h3>
     </div>
   </div>
   <div class="col-md-6">
-    <div class="border">
+    <div class="border border-black p-3">
       <div class="text-body-secundary">total</div>
       <h3> <%= @habit_static.total_occurrences %> days</h3>
     </div>
@@ -25,8 +25,10 @@
 
 <div class="border border-5 border-primary rounded-circle text-center m-auto d-flex align-items-center justify-content-center score">
    <h3><strong>
+    <%# format number below %>
 
-   <%= (@habit_static.completed_occurrences ).to_f  / (@habit_static.total_occurrences ) * 100 %>
+
+   <%= ((@habit_static.completed_occurrences ).to_f  / (@habit_static.total_occurrences ) * 100).to_i %>
    </strong>
    </h3>
 </div>

@@ -22,8 +22,7 @@ def create_occurrences(habit)
   end
 end
 
-# insert habits if environment is development
-insert_habits if Rails.env.development?
+
 
 # rubocop:disable Metrics/MethodLength
 def insert_habits
@@ -137,3 +136,6 @@ User.create!(email: "jeannine@mail.com",
              password_confirmation: 'password',
              first_name: 'Jeannine',
              last_name: 'Vernon')
+
+             # insert habits if environment is development
+insert_habits if Rails.env.development?
