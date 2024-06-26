@@ -22,6 +22,97 @@ def create_occurrences(habit)
   end
 end
 
+# insert habits if environment is development
+insert_habits if Rails.env.development?
+
+# rubocop:disable Metrics/MethodLength
+def insert_habits
+  # create 10 habits with occurrences, at lest 4 habits with occurrences
+  habit = Habit.create!(name: 'Meditate',
+                        priority: rand(1..3),
+                        start_date: Faker::Date.between(from: 1.year.ago, to: Date.today), frequency: 'daily',
+                        status: 'active',
+                        user_id: User.all.sample.id,
+                        category: 'Mindfulness')
+  create_occurrences(habit)
+
+  habit = Habit.create!(name: 'Read',
+    priority: rand(1..3),
+    start_date: Faker::Date.between(from: 1.year.ago, to: Date.today), frequency: 'daily',
+    status: 'active',
+    user_id: User.all.sample.id,
+    category: 'Learning')
+
+  habit = Habit.create!(name: 'Exercise',
+    priority: rand(1..3),
+    start_date: Faker::Date.between(from: 1.year.ago, to: Date.today), frequency: 'daily',
+    status: 'active',
+    user_id: User.all.sample.id,
+    category: 'Health')
+  create_occurrences(habit)
+
+  habit = Habit.create!(name: 'Learn',
+    priority: rand(1..3),
+    start_date: Faker::Date.between(from: 1.year.ago, to: Date.today), frequency: 'daily',
+    status: 'active',
+    user_id: User.all.sample.id,
+    category: 'Learning')
+
+  habit = Habit.create!(name: 'Write',
+    priority: rand(1..3),
+    start_date: Faker::Date.between(from: 1.year.ago, to: Date.today), frequency: 'daily',
+    status: 'active',
+    user_id: User.all.sample.id,
+    category: 'Creativity')
+
+  habit = Habit.create!(name: 'Draw',
+    priority: rand(1..3),
+    start_date: Faker::Date.between(from: 1.year.ago, to: Date.today), frequency: 'daily',
+    status: 'active',
+    user_id: User.all.sample.id,
+    category: 'Creativity')
+
+  habit = Habit.create!(name: 'Cook',
+                        priority: rand(1..3),
+                        start_date: Faker::Date.between(from: 1.year.ago, to: Date.today), frequency: 'daily',
+                        status: 'active',
+                        user_id: User.all.sample.id,
+                        category: 'Health')
+
+  habit = Habit.create!(name: 'Code',
+                        priority: rand(1..3),
+                        start_date: Faker::Date.between(from: 1.year.ago, to: Date.today), frequency: 'weekly',
+                        days_of_week: ['Monday', 'Thursday'],
+                        status: 'active',
+                        user_id: User.all.sample.id,
+                        category: 'Learning')
+  create_occurrences(habit)
+
+  Habit.create!(
+    name: 'Dance',
+    priority: rand(1..3),
+    start_date: Faker::Date.between(from: 1.year.ago, to: Date.today),
+    frequency: 'weekly',
+    days_of_week: ['Tuesday', 'Friday'],
+    status: 'active',
+    user_id: User.all.sample.id,
+    category: 'Health'
+  )
+
+  habit = Habit.create!(
+    name: 'Take a cold shower',
+    priority: rand(1..3),
+    start_date: Faker::Date.between(from: 1.year.ago, to: Date.today),
+    frequency: 'daily',
+    status: 'active',
+    reminder: Faker::Time.between_dates(from: Date.today, to: Date.today, period: :morning),
+    user_id: User.all.sample.id,
+    category: 'Health'
+  )
+  create_occurrences(habit)
+end
+# rubocop:enable Metrics/MethodLength
+
 # create 5 users
 User.create!(email: "pedro@mail.com",
              password: 'password',
@@ -46,87 +137,3 @@ User.create!(email: "jeannine@mail.com",
              password_confirmation: 'password',
              first_name: 'Jeannine',
              last_name: 'Vernon')
-
-# create 10 habits with occurrences, at lest 4 habits with occurrences
-habit = Habit.create!(name: 'Meditate',
-                      priority: rand(1..3),
-                      start_date: Faker::Date.between(from: 1.year.ago, to: Date.today), frequency: 'daily',
-                      status: 'active',
-                      user_id: User.all.sample.id,
-                      category: 'Mindfulness')
-create_occurrences(habit)
-
-habit = Habit.create!(name: 'Read',
-                      priority: rand(1..3),
-                      start_date: Faker::Date.between(from: 1.year.ago, to: Date.today), frequency: 'daily',
-                      status: 'active',
-                      user_id: User.all.sample.id,
-                      category: 'Learning')
-
-habit = Habit.create!(name: 'Exercise',
-                      priority: rand(1..3),
-                      start_date: Faker::Date.between(from: 1.year.ago, to: Date.today), frequency: 'daily',
-                      status: 'active',
-                      user_id: User.all.sample.id,
-                      category: 'Health')
-create_occurrences(habit)
-
-habit = Habit.create!(name: 'Learn',
-                      priority: rand(1..3),
-                      start_date: Faker::Date.between(from: 1.year.ago, to: Date.today), frequency: 'daily',
-                      status: 'active',
-                      user_id: User.all.sample.id,
-                      category: 'Learning')
-
-habit = Habit.create!(name: 'Write',
-                      priority: rand(1..3),
-                      start_date: Faker::Date.between(from: 1.year.ago, to: Date.today), frequency: 'daily',
-                      status: 'active',
-                      user_id: User.all.sample.id,
-                      category: 'Creativity')
-
-habit = Habit.create!(name: 'Draw',
-                      priority: rand(1..3),
-                      start_date: Faker::Date.between(from: 1.year.ago, to: Date.today), frequency: 'daily',
-                      status: 'active',
-                      user_id: User.all.sample.id,
-                      category: 'Creativity')
-
-habit = Habit.create!(name: 'Cook',
-                      priority: rand(1..3),
-                      start_date: Faker::Date.between(from: 1.year.ago, to: Date.today), frequency: 'daily',
-                      status: 'active',
-                      user_id: User.all.sample.id,
-                      category: 'Health')
-
-habit = Habit.create!(name: 'Code',
-                      priority: rand(1..3),
-                      start_date: Faker::Date.between(from: 1.year.ago, to: Date.today), frequency: 'weekly',
-                      days_of_week: ['Monday', 'Thursday'],
-                      status: 'active',
-                      user_id: User.all.sample.id,
-                      category: 'Learning')
-create_occurrences(habit)
-
-Habit.create!(
-  name: 'Dance',
-  priority: rand(1..3),
-  start_date: Faker::Date.between(from: 1.year.ago, to: Date.today),
-  frequency: 'weekly',
-  days_of_week: ['Tuesday', 'Friday'],
-  status: 'active',
-  user_id: User.all.sample.id,
-  category: 'Health'
-)
-
-habit = Habit.create!(
-  name: 'Take a cold shower',
-  priority: rand(1..3),
-  start_date: Faker::Date.between(from: 1.year.ago, to: Date.today),
-  frequency: 'daily',
-  status: 'active',
-  reminder: Faker::Time.between_dates(from: Date.today, to: Date.today, period: :morning),
-  user_id: User.all.sample.id,
-  category: 'Health'
-)
-create_occurrences(habit)
