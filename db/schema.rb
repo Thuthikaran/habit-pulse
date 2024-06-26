@@ -16,9 +16,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_24_193233) do
 
   create_table "habit_statics", force: :cascade do |t|
     t.bigint "habit_id", null: false
-    t.integer "total_occurrences"
-    t.integer "completed_occurrences"
-    t.integer "missed_occurrences"
+    t.integer "total_occurrences", default: 0
+    t.integer "completed_occurrences", default: 0
+    t.integer "missed_occurrences", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["habit_id"], name: "index_habit_statics_on_habit_id"
@@ -41,7 +41,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_24_193233) do
   end
 
   create_table "occurrences", force: :cascade do |t|
-    t.string "completion_status"
+    t.string "completion_status", default: "pending"
     t.date "date"
     t.bigint "habit_id", null: false
     t.datetime "created_at", null: false
