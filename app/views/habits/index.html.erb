@@ -11,7 +11,8 @@
                <% if habit.today_occurrence.completion_status == 'completed' %>
                 <button class="btn btn-outline-primary complete-btn mr-2" disabled data-habit-id="<%= habit.id %>">Completed</button>
               <% elsif habit.today_occurrence.completion_status == 'pending' %>
-                <button class="btn btn-outline-primary complete-btn mr-2" data-habit-id="<%= habit.id %>">Complete</button>
+                <%= link_to 'Complete' ,complete_habit_path(habit.id) ,method: 'patch' %>
+
               <% end %>
               <div class="dropdown">
                 <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton<%= habit.id %>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

@@ -11,6 +11,12 @@ class HabitsController < ApplicationController
     @habit = Habit.new
   end
 
+  def complete
+    @habit = Habit.find(params[:id])
+    @habit.occurrences.find_by(date: Date.today).update(completion_status: 'completed')
+    redirect_to habits_path, notice: 'Habit was successfully completed.'
+  end
+
   def create
 
     @habit = Habit.new(habit_params)

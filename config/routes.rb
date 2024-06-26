@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :habit_statics, only: %i[show]
   get 'contact', to: 'pages#contact'
   get 'about', to: 'pages#about'
+  get 'habits/:id/complete', to: 'habits#complete', as: 'complete_habit'
 
   post 'guest_login', to: 'sessions#guest_login'
   #get 'create', to:'habits#new'
