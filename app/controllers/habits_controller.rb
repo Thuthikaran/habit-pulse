@@ -6,6 +6,7 @@ class HabitsController < ApplicationController
     end
 
     def update
+
       if @habit.update(habit_params)
         redirect_to habits_path, notice: 'Habit was successfully updated.'
       else
