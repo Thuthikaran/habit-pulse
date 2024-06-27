@@ -5,8 +5,11 @@
       <div class="col-12 mb-3">
         <div class="card border-0 shadow-sm" id="habit-<%= habit.id %>">
           <div class="card-body d-flex align-items-center justify-content-between">
+            <div class="d-flex flex-column">
+              <%= link_to habit.name, habit_static_path(habit.habit_static), class: "text-dark text-decoration-none fs-5" %>
+              <small class="text-body-secondary"><%= habit.category %></small>
+            </div>
 
-            <%= link_to habit.name, habit_static_path(habit.habit_static), class: "text-dark text-decoration-none fs-5" %>
             <div class="d-flex align-items-center">
                <% if habit.today_occurrence.completion_status == 'completed' %>
                 <button class="btn btn-outline-primary complete-btn mr-2" disabled data-habit-id="<%= habit.id %>">Completed</button>
@@ -14,7 +17,7 @@
                 <%= link_to 'Complete' ,complete_habit_path(habit.id) ,method: 'patch' %>
 
               <% end %>
-             <div class="dropdown">
+             <div class="dropdown ms-2">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton<%= habit.id %>" data-bs-toggle="dropdown" aria-expanded="false">
                   Actions
                 </button>
@@ -30,4 +33,3 @@
     <% end %>
   </div>
 </div>
-
