@@ -138,4 +138,30 @@ User.create!(email: "jeannine@mail.com",
              last_name: 'Vernon')
 
              # insert habits if environment is development
-insert_habits if Rails.env.development?
+# insert_habits if Rails.env.development?
+
+# create habit for each user with 7 consectutive occurrences (5 compelted, 2 missed) in the last 7 days
+User.all.each do |user|
+  habit = Habit.create!(name: 'Meditate for 10 minutes',
+                        priority: rand(1..3),
+                        start_date: Faker::Date.between(from: 1.year.ago, to: Date.today), frequency: 'daily',
+                        status: 'active',
+                        user_id: user.id,
+                        category: 'Mindfulness')
+  7.times do |i|
+    occurrence = habit.occurrences.find_or_initialize_by(date: Date.today - i)
+    occurrence.completion_status = i < 5 ? 'completed' : 'missed'
+    occurrence.save!
+  end
+  habit = Habit.create!(name: 'Exercise for 20 minutes',
+                        priority: rand(1..3),
+                        start_date: Faker::Date.between(from: 1.year.ago, to: Date.today), frequency: 'daily',
+                        status: 'active',
+                        user_id: user.id,
+                        category: 'Health')
+  6.times do |i|
+    occurrence = habit.occurrences.find_or_initialize_by(date: Date.today - 1 - i)
+    occurrence.completion_status = i < 5 ? 'completed' : 'completed'
+    occurrence.save!
+  end
+end
