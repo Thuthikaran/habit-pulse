@@ -52,17 +52,11 @@ class HabitsController < ApplicationController
 
   private
 
-  def habit_params
-    params.require(:habit).permit(:name, :priority, :start_date, :end_date, :reminder, :frequency, :status, :category, days_of_week: [])
+ def habit_params
+    params.require(:habit).permit(:name, :priority, :start_date, :end_date, :reminder, :frequency, :status, :category, :description, days_of_week: [])
   end
-
-  def habit_params
-    params.require(:habit).permit(:name, :priority, :start_date, :end_date, :reminder, :frequency, :status, :category, days_of_week: [])
-  end
-
   def set_habit
     @habit = Habit.find(params[:id])
   end
-
 
 end
