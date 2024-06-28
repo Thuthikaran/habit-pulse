@@ -10,6 +10,7 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+@import "new_styles";
 
 .left {
     color:red;
@@ -23,6 +24,4 @@
     border: 2px solid #999; /* Optional: border for the circle */
     margin-bottom: 10px; /* Optional: adjust spacing */
 }
-
-@import 'navbar';
 

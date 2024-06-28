@@ -1,37 +1,34 @@
-<div>
-  <div>
+<div class="create-form-container">
+  <h2>Create a habit</h2>
+<%= Time.now.strftime("%d %b %Y") %>
+
+<%= simple_form_for(@habit, html: { novalidate: true }) do |f| %>
+
+  <div> 
+    <%= f.label :name, 'Habit' %>
+    <%= f.input :name, label: false, required: true %>
+    <%= f.input :category, collection: Habit::CATEGORIES %>
+    
     <div>
-      <h2>Create a habit</h2>
-      <%= Time.now.strftime("%d %b %Y") %>
-
-      <%= simple_form_for(@habit, html: { novalidate: true }) do |f| %>
-
-        <div> 
-          <%= f.label :name, 'Habit' %>
-          <%= f.input :name, label: false, required: true %>
-          <%= f.input :category, collection: Habit::CATEGORIES %>
-          
+      <label for="frequency">Frequency</label>
+      <div id="frequency-options">
+        <% ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].each do |day| %>
           <div>
-            <label for="frequency">Frequency</label>
-            <div id="frequency-options">
-              <% ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].each do |day| %>
-                <div>
-                  <%= check_box_tag 'habit[days][]', day, false, id: "checkbox_#{day.downcase}" %>
-                  <label for="checkbox_<%= day.downcase %>"><%= day %></label>
-                </div>
-              <% end %>
-            </div>
+            <%= check_box_tag 'habit[days][]', day, false, id: "checkbox_#{day.downcase}" %>
+            <label for="checkbox_<%= day.downcase %>"><%= day %></label>
           </div>
-          
-          <%= f.input :reminder, label: 'Reminder' %>
-          <%= f.input :description, label: 'Description', as: :text, placeholder: 'Enter a description of the habit', required: false %>
-        </div>
-
-        <div>
-          <%= f.submit 'Create Habit' %>
-        </div>
-
-      <% end %>
+        <% end %>
+      </div>
     </div>
+    
+    <%= f.input :reminder, label: 'Reminder' %>
+    <%= f.input :description, label: 'Description', as: :text, placeholder: 'Enter a description of the habit', required: false %>
   </div>
+
+  <div>
+    <%= f.submit 'Create Habit' %>
+  </div>
+
+<% end %>
+
 </div>
