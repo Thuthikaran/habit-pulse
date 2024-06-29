@@ -16,11 +16,12 @@
 
   <div class="container mt-5 text-left">
     <div class="row">
-      <aside class="col-md-3">
-        <div class="sidebar">
-          <div class="profile-image-placeholder"></div>
-          <h3>@username</h3>
-          <p>Your progress: 744/744</p>
+      <aside class="col-md-3 border">
+        <div class="sidebar border text-center">
+          <div class="profile-image-placeholder mx-auto"></div>
+          <div class="mb-5">@username</div>
+
+          <p>Your progress: <span>744/744</span></p>
           <p>Completion rate: 🏆</p>
           <div class="mt-3">
             <%= link_to "Create a habit", new_habit_path, class: "btn btn-outline-primary" %>
