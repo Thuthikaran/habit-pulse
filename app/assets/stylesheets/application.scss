@@ -12,17 +12,27 @@
 @import "pages/index";
 
 .left {
-    color:red;
+  color: red;
 }
 
 .profile-image-placeholder {
-    width: 100px; /* Adjust size as needed */
-    height: 100px; /* Adjust size as needed */
-    background-color: #ccc; /* Placeholder background color */
-    border-radius: 50%; /* Make it circular */
-    border: 2px solid #999; /* Optional: border for the circle */
-    margin-bottom: 10px; /* Optional: adjust spacing */
+  width: 100px;
+  /* Adjust size as needed */
+  height: 100px;
+  /* Adjust size as needed */
+  background-color: #ccc;
+  /* Placeholder background color */
+  border-radius: 50%;
+  /* Make it circular */
+  border: 2px solid #999;
+  /* Optional: border for the circle */
+  margin-bottom: 10px;
+  /* Optional: adjust spacing */
 }
 
 @import 'navbar';
 
+.btn {
+
+  border-width: 3px;
+}
