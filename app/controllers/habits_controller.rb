@@ -50,6 +50,10 @@ class HabitsController < ApplicationController
     end
   end
 
+  def habit_params
+    params.require(:habit).permit(:name, :details, days: [])
+  end
+
   private
 
  def habit_params

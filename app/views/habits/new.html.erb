@@ -1,45 +1,51 @@
 <div class="create-form-container">
-  <h2 class="create-habit">Create a habit</h2>
-  <span class="date-display"><%= Time.now.strftime("< %d %b %Y >") %></span>
+  <h2 class="create-habit"><span class="plus">+</span> Create a habit</h2>
+  <div class="date-display"><%= Time.now.strftime("< %d %b %Y >") %></div>
+
 
   <%= simple_form_for(@habit, html: { novalidate: true }) do |f| %>
 
-  <div> 
-  <%= f.label :name, 'Habit', class: "habit-label-field" %>
-    <%= f.input :name, label: false, required: true %>  
-    <span class="habit-label-field">
-      <%= f.input :category, collection: Habit::CATEGORIES %>
-    </span>
+    <div class="breakpoint">
 
-    <div>
-      <label for="frequency" class="habit-label-field">Frequency</label>
-      <div id="frequency-options">
-        <% ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].each do |day| %>
-          <div>
-            <%= check_box_tag 'habit[days][]', day, false, id: "checkbox_#{day.downcase}" %>
-            <label for="checkbox_<%= day.downcase %>"><%= day %></label>
-          </div>
-        <% end %>
+      <div class="habit-label-input">
+        <%= f.label :name, 'Habit', class: "habit-label-field" %>
+        <%= f.input :name, label: false, required: true, input_html: { class: "bg-lavender" } %>
       </div>
+                
+      <div class="category-label-input">
+        <%= f.label :category, 'Category', class: "habit-label-field"  %>
+        <%= f.input :category, collection: Habit::CATEGORIES, label: false, input_html: { class: "bg-lavender" } %>
+      </div>
+
+      <div class="frequency-container">
+        <label for="frequency" class="habit-label-field">Frequency</label>
+        <div id="frequency-options">
+          <% ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].each do |day| %>
+            <div class="checkbox-option">
+              <%= check_box_tag 'habit[days][]', day, false, id: "checkbox_#{day.downcase}" %>
+              <label for="checkbox_<%= day.downcase %>"><%= day %></label>
+            </div>
+          <% end %>
+        </div>
+      </div>
+            
+      <div class="reminder-label-input">
+        <%= f.label :reminder, 'Reminder', class: "habit-label-field" %>
+        <%= f.input :reminder, label: false, input_html: { class: "reminder-lavender" }  %>
+      </div>
+
+      <div class="description-label-input">
+        <%= f.label :description, 'Description', class: "habit-label-field" %>
+        <%= f.input :description, label: false, as: :text, placeholder: 'Visit the gym for a workout session', required: false, input_html: { class: "bg-lavender" }  %>
+      </div>
+
     </div>
-        
-    <span class="habit-label-field">
-      <%= f.input :reminder, label: 'Reminder' %>
-    </span>
 
-    <span class="habit-label-field">
-      <%= f.input :description, label: 'Description', as: :text, placeholder: 'Enter a description of the habit', required: false %>
-    </span>
 
-  </div>
 
-  <div>
-    <%= f.submit 'submit', class: 'submit-btn' %>
-  </div>
-  <div>
-    <%= f.submit 'cancel', class: 'cancel-btn' %>
-  </div>
+    <%= f.submit 'submit', class: 'submit' %>
+    <%= f.submit 'cancel', class: 'cancel' %>   
 
-<% end %>
+  <% end %>
 
 </div>
