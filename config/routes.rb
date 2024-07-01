@@ -18,4 +18,6 @@ Rails.application.routes.draw do
   post 'guest_login', to: 'sessions#guest_login'
   #get 'create', to:'habits#new'
 
+  get 'habits/today', to: 'habits#today'
+
 end
