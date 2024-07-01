@@ -16,25 +16,20 @@
 
   <div class="container mt-5 text-left">
     <div class="row">
-      <aside class="col-md-3 border">
-        <div class="sidebar border text-center">
+      <aside class="col-md-3  side-nav">
+        <div class="sidebar  text-center">
           <div class="profile-image-placeholder mx-auto"></div>
-          <div class="mb-5">@username</div>
+          <div class="mb-5 username">@username</div>
 
-          <p>Your progress: <span>744/744</span></p>
-          <p>Completion rate: 🏆</p>
-          <div class="mt-3">
-            <%= link_to "Create a habit", new_habit_path, class: "btn btn-outline-primary" %>
+          <p><span class="label">Your progress: </span><span class="user-progress">744/744</span></p>
+          <p><span class="label">Completion rate:</span> <span>100% 🏆</span></p>
+          <div class="mt-5">
+            <%= link_to "Create a habit", new_habit_path, class: "btn btn-primary" %>
           </div>
           <div class="mt-3">
-            <%= link_to "View habits", habits_path, class: "btn btn-outline-primary" %>
+            <%= link_to "View habits", habits_path, class: "btn btn-outline-primary mt-2" %>
           </div>
-          <div class="mt-3">
-            <p>share↗️</p>
-          </div>
-          <ul class="social-links">
-            <li><a href="https://www.facebook.com/" target="_blank">fb</a></li>
-          </ul>
+
         </div>
       </aside>
       <main class="col-md-9">
