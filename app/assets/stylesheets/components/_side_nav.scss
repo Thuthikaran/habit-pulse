@@ -1,0 +1,21 @@
+.side-nav{
+  font-size: 1.1em;
+  .label{
+    font-weight: 500;
+    color: $primary;
+  }
+  span{
+    font-size: 1.2em;
+
+  }
+  .user-progress {
+    color: $body-color;
+  }
+  .username{
+    opacity: .7;
+  }
+  .btn{
+    line-height: 2.5;
+    min-width: 173px;
+  }
+}

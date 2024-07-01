@@ -1,8 +1,9 @@
-FREQUENCIES = %w[daily weekly].freeze
-STATUSES = %w[active inactive].freeze
-CATEGORIES = %w[Health Creativity Learning Mindfulness].freeze
-
 class Habit < ApplicationRecord
+  FREQUENCIES = %w[daily weekly].freeze
+  STATUSES = %w[active inactive].freeze
+  CATEGORIES = %w[Health Creativity Learning Mindfulness].freeze
+  DAYS_OF_WEEK = %w[Monday Tuesday Wednesday Thursday Friday Saturday Sunday].freeze
+
   belongs_to :user
   validates :name, presence: true, length: { minimum: 3, maximum: 50 }, uniqueness: { scope: :user_id }
   # restrict priority to 1-3
@@ -22,6 +23,11 @@ class Habit < ApplicationRecord
 
   # callback to create occurrences for a habit based on frequency, between start_date and end_date, if end_date is nil then it is set to 1 year from start_date
   after_create :create_occurrences
+
+  # get today's occurrence
+  def today_occurrence
+    occurrences.find_by(date: Date.today)
+  end
 
   private
 
