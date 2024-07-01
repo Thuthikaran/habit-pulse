@@ -49,6 +49,10 @@ class HabitsController < ApplicationController
     end
   end
 
+  def today
+    @habits = current_user.habit.where("DATE(created_at) = ?", Date.today)
+  end
+
   private
 
   def habit_params
