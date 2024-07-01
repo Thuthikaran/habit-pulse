@@ -15,29 +15,27 @@
   <%= render "shared/flashes" %>
 
   <div class="container mt-5 text-left">
-    <aside class="sidebar">
-      <div class="profile-image-placeholder"></div>
-      <h3>@username</h3>
-      <div class="mt-3">
-      <button type="button">New Habit</button>
-      </div>
-      <div class="mt-3">
-      <button type="button">View All Habits</button>
-      </div>
-      <h5 class="mt-3">Share on</h5>
-      <ul class="social-links">
-        <li><a href="#">Facebook</a></li>
-        <li><a href="#">Twitter</a></li>
-        <li><a href="#">Instagram</a></li>
-        <li><a href="#">WhatsApp</a></li>
-        <li><a href="#">Pinterest</a></li>
-        <li><a href="#">Snapchat</a></li>
-        <li><a href="#">TikTok</a></li>
-      </ul>
-    </aside>
-    <main class="content">
-      <%= yield %>
-    </main>
+    <div class="row">
+      <aside class="col-md-3  side-nav">
+        <div class="sidebar  text-center">
+          <div class="profile-image-placeholder mx-auto"></div>
+          <div class="mb-5 username">@username</div>
+
+          <p><span class="label">Your progress: </span><span class="user-progress">744/744</span></p>
+          <p><span class="label">Completion rate:</span> <span>100% 🏆</span></p>
+          <div class="mt-5">
+            <%= link_to "Create a habit", new_habit_path, class: "btn btn-primary" %>
+          </div>
+          <div class="mt-3">
+            <%= link_to "View habits", habits_path, class: "btn btn-outline-primary mt-2" %>
+          </div>
+
+        </div>
+      </aside>
+      <main class="col-md-9">
+        <%= yield %>
+      </main>
+    </div>
   </div>
 </body>
 </html>

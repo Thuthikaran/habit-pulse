@@ -1,5 +1,43 @@
 <!-- app/views/pages/home.html.erb -->
-<h1>Welcome to Habit Pulse</h1>
-<p>This innovative app is designed to help you organize your habits and achieve success in every area of your life</p>
+<style>
+  .home-container {
+    text-align: center;
+    margin-top: 50px;
+    font-family: Arial, sans-serif;
+  }
 
+  .home-title {
+    font-size: 36px;
+    color: #333;
+    margin-bottom: 20px;
+  }
 
+  .home-description {
+    font-size: 18px;
+    color: #777;
+    line-height: 1.6;
+  }
+
+  .home-button {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 12px 24px;
+    font-size: 16px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+
+  .home-button:hover {
+    background-color: #0056b3;
+  }
+</style>
+
+<div class="home-container">
+  <h1 class="home-title">Welcome to Habit Pulse</h1>
+  <p class="home-description">This innovative app is designed to help you organize your habits and achieve success in every area of your life.</p>
+  <a href="/about" class="home-button">About Us</a>
+</div>
