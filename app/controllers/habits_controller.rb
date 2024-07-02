@@ -23,7 +23,6 @@ class HabitsController < ApplicationController
     # get habits that have occurrences for today
     @habits = current_user.habits.select { |habit| habit.today_occurrence.present? }
 
-
   end
 
   def new
@@ -49,6 +48,12 @@ class HabitsController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
+
+  def today
+    @habits = current_user.habits.where("DATE(created_at) = ?", Date.today)
+  end
+
+  private
 
   def habit_params
     params.require(:habit).permit(:name, :details, days: [])
