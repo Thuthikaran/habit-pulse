@@ -6,6 +6,8 @@ class User < ApplicationRecord
 
         has_many :habits, dependent: :destroy
 
+        has_one_attached :photo
+
          def guest?
           guest
         end
