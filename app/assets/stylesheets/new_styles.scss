@@ -21,22 +21,24 @@
 .frequency-container,
 .reminder-label-input,
 .description-label-input {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
+    display: grid;
+    grid-template-columns: 1 auto;
+    // align-items: center;
+    // margin-bottom: 10px;
 }
 
 .habit-label-field {
-    flex: 0 0 150px;
+    // flex: 0 0 150px;
     text-align: left;
     margin-right: 10px;
+    width: fit-content;
 }
 
 .habit-label-input input,
 .category-label-input select,
 .reminder-label-input input,
 .description-label-input textarea {
-    flex: 1;
+    // flex: 1;
 }
 
 #frequency-options {
@@ -68,8 +70,6 @@
 
 .bg-lavender  {
     background-color: #F3F1FF; 
-    padding: 8px; 
-    border: 1px solid #ccc;
 }
 
 .reminder-lavender {
@@ -81,9 +81,13 @@
 }
 
 .submit {
-    background: navy;
+    background-color:red;
 }
 
-.cancel {
-    background-color: #f44336;
+input, select {
+    box-sizing: border-box
+}
+
+.category-input {
+    background: red;
 }
