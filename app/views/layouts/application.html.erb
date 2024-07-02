@@ -19,10 +19,12 @@
       <aside class="col-md-3  side-nav">
         <div class="sidebar  text-center">
            <% if current_user&.photo.present? %>
-            <%= cl_image_tag current_user.photo.key, height: 300, width: 400, crop: :fill %>
+            <%= cl_image_tag current_user.photo.key, height: 300, width: '100%', crop: :fill %>
           <% else %>
             <div class="profile-image-placeholder mx-auto"></div>
           <% end %>
+
+          <%= link_to 'Edit',  edit_user_registration_path %>
 
           <button type="button" class="btn btn-flat" data-bs-toggle="modal" data-bs-target="#editModal">
             Upload Photo
@@ -45,23 +47,7 @@
       </main>
     </div>
   </div>
-  <% if current_user %>
-    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="editModalLabel">Edit Profile</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <%= render 'devise/registrations/edit' %>
-        </div>
-      </div>
-    </div>
-  </div>
-  <% end %>
+
 
 </body>
 </html>
