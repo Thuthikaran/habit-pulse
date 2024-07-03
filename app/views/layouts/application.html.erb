@@ -8,7 +8,7 @@
   <%= csp_meta_tag %>
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   <%= javascript_importmap_tags %>
-  <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
+
 </head>
 <body>
   <%= render "shared/navbar" %>
@@ -19,12 +19,13 @@
       <aside class="col-md-3  side-nav">
         <div class="sidebar  text-center">
            <% if current_user&.photo.present? %>
-            <%= cl_image_tag current_user.photo.key, height: 300, width: '100%', crop: :fill %>
+            <%= cl_image_tag current_user.photo.key, height: 300, width: 300, crop: :fill %>
           <% else %>
             <div class="profile-image-placeholder mx-auto"></div>
           <% end %>
 
           <%= link_to 'Edit',  edit_user_registration_path %>
+          <%= link_to "Edit user", edit_user_registration_path, class: "btn btn-primary", data: { turbo_frame: "remote_modal" } %>
 
           <button type="button" class="btn btn-flat" data-bs-toggle="modal" data-bs-target="#editModal">
             Upload Photo
@@ -44,6 +45,7 @@
       </aside>
       <main class="col-md-9">
         <%= yield %>
+        <%= turbo_frame_tag "remote_modal", target: "_top" %>
       </main>
     </div>
   </div>
