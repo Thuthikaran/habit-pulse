@@ -29,7 +29,7 @@
             <% end %>
           </div>
 
-          <div class="mb-5 mt-3 username">@username</div>
+          <div class="mb-5 mt-3 username"><%= "#{current_user.first_name } #{current_user.last_name}"%></div>
 
           <p><span class="label">Your progress: </span><span class="user-progress">744/744</span></p>
           <p><span class="label">Completion rate:</span> <span>100% 🏆</span></p>
