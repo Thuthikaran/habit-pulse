@@ -13,23 +13,23 @@
   <%= render "shared/navbar" %>
   <%= render "shared/flashes" %>
 
-  <div class="container mt-5 text-left">
+  <div class="container-fluid mt-5 text-left">
     <div class="row">
-      <aside class="col-md-3  side-nav">
-        <div class="sidebar  text-center">
-           <% if current_user&.photo.present? %>
-            <%= cl_image_tag current_user.photo.key, height: 300, width: 300, crop: :fill %>
-          <% else %>
-            <div class="profile-image-placeholder mx-auto"></div>
-          <% end %>
+    <%# if user not logged in hide sidebar %>
 
-          <%= link_to 'Edit',  edit_user_registration_path %>
-          <%= link_to "Edit user", edit_user_registration_path, class: "btn btn-primary", data: { turbo_frame: "remote_modal" } %>
+      <div class="col-md-3" >
+        <div class="sidebar d-flex flex-column align-items-center  side-nav">
 
-          <button type="button" class="btn btn-flat" data-bs-toggle="modal" data-bs-target="#editModal">
-            Upload Photo
-          </button>
-          <div class="mb-5 username">@username</div>
+          <div class="container-avatar">
+
+            <img class="avatar-large" alt="avatar-large" src="<%=  current_user&.photo.present? ? cl_image_path( current_user&.photo&.key) : asset_path('default_profile.png')  %>" />
+
+            <%= link_to  edit_user_registration_path do %>
+              <i class="fa-solid fa-pen-to-square "></i>
+            <% end %>
+          </div>
+
+          <div class="mb-5 mt-3 username">@username</div>
 
           <p><span class="label">Your progress: </span><span class="user-progress">744/744</span></p>
           <p><span class="label">Completion rate:</span> <span>100% 🏆</span></p>
@@ -41,7 +41,7 @@
           </div>
 
         </div>
-      </aside>
+      </div>
       <main class="col-md-9">
         <%= yield %>
         <%= turbo_frame_tag "remote_modal", target: "_top" %>
