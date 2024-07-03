@@ -65,6 +65,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_01_173220) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "days_of_week", default: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], array: true
+    t.text "description"
     t.index ["user_id"], name: "index_habits_on_user_id"
   end
 

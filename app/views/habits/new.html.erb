@@ -1,23 +1,51 @@
+<div class="create-form-container">
+  <h2 class="create-habit"><span class="plus">+</span> Create a habit</h2>
+  <div class="date-display"><%= Time.now.strftime("< %d %b %Y >") %></div>
 
 
-<div class="container">
-  <div class="row justify-content-center">
-    <div class="col-12 col-sm-8">
-      <h2>New Habit</h2>
-      <%= simple_form_for(@habit) do |f| %>
-      <div class="form-inputs">
-          <%= f.input :name %>
-          <%= f.input :priority, collection: [1,2,3] %>
+  <%= simple_form_for(@habit, html: { novalidate: true }) do |f| %>
 
-          <%= f.input :reminder %>
+    <div class="breakpoint">
 
-          <%= f.input :category, collection: Habit::CATEGORIES  %>
-          <%= f.input :days_of_week %>
+      <div class="habit-label-input">
+        <%= f.label :name, 'Habit', class: "habit-label-field" %>
+        <%= f.input :name, label: false, required: true %>
+      </div>
+
+      <div class="category-label-input">
+        <%= f.label :category, 'Category', class: "habit-label-field"  %>
+        <%= f.input :category, collection: Habit::CATEGORIES, label: false %>
+      </div>
+
+      <div class="frequency-container">
+        <label for="frequency" class="habit-label-field">Frequency</label>
+        <div id="frequency-options">
+          <% ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].each do |day| %>
+            <div class="checkbox-option">
+              <%= check_box_tag 'habit[days][]', day, false, id: "checkbox_#{day.downcase}" %>
+              <label for="checkbox_<%= day.downcase %>"><%= day %></label>
+            </div>
+          <% end %>
         </div>
-        <div class="form-actions">
-          <%= f.submit  class: 'btn btn-primary'  %>
-        </div>
-      <% end %>
+      </div>
+
+      <div class="reminder-label-input">
+        <%= f.label :reminder, 'Reminder', class: "habit-label-field" %>
+        <%= f.input :reminder, label: false %>
+      </div>
+
+      <div class="description-label-input">
+        <%= f.label :description, 'Description', class: "habit-label-field" %>
+        <%= f.input :description, label: false, as: :text,required: false %>
+      </div>
+
     </div>
-  </div>
+
+
+
+    <%= f.submit 'submit', class: 'submit btn btn-danger px-5' %>
+    <%= f.submit 'cancel', class: 'cancel' %>
+
+  <% end %>
+
 </div>
