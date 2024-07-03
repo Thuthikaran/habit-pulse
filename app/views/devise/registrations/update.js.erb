@@ -1,0 +1,7 @@
+<% if resource.errors.any? %>
+  $("#editModal .modal-body").html("<%= j render 'devise/registrations/edit' %>");
+  $('#editModal').modal('show');
+<% else %>
+  $('#editModal').modal('hide');
+  // Optionally, add any other actions you want to perform on success
+<% end %>

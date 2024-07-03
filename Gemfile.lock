@@ -106,6 +106,10 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
+    cloudinary (2.1.1)
+      faraday (>= 2.0.1, < 3.0.0)
+      faraday-follow_redirects (~> 0.3.0)
+      faraday-multipart (~> 1.0, >= 1.0.4)
     concurrent-ruby (1.3.3)
     connection_pool (2.4.1)
     crass (1.0.6)
@@ -129,6 +133,14 @@ GEM
     execjs (2.9.1)
     faker (3.4.1)
       i18n (>= 1.8.11, < 2)
+    faraday (2.9.2)
+      faraday-net_http (>= 2.0, < 3.2)
+    faraday-follow_redirects (0.3.0)
+      faraday (>= 1, < 3)
+    faraday-multipart (1.0.4)
+      multipart-post (~> 2)
+    faraday-net_http (3.1.0)
+      net-http
     ffi (1.17.0)
     ffi (1.17.0-arm64-darwin)
     ffi (1.17.0-x86_64-darwin)
@@ -163,7 +175,10 @@ GEM
     mini_mime (1.1.5)
     minitest (5.23.1)
     msgpack (1.7.2)
+    multipart-post (2.4.1)
     mutex_m (0.2.0)
+    net-http (0.4.1)
+      uri
     net-imap (0.4.12)
       date
       net-protocol
@@ -277,10 +292,14 @@ GEM
       railties (>= 6.0.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+<<<<<<< HEAD
+    uri (0.13.0)
+=======
     view_component (3.12.1)
       activesupport (>= 5.2.0, < 8.0)
       concurrent-ruby (~> 1.0)
       method_source (~> 1.0)
+>>>>>>> master
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.2.1)
@@ -314,6 +333,7 @@ DEPENDENCIES
   bootsnap
   bootstrap (~> 5.2)
   capybara
+  cloudinary
   debug
   devise
   dotenv-rails
