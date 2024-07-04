@@ -55,7 +55,11 @@ class HabitsController < ApplicationController
 
   def filter_by_date
     selected_date = params[:date]
-    @habits = current_user.habits.where('DATE(occurrence_date) = ?', selected_date)
+
+    # get habits that have occurrences for the selected date
+    @habits = current_user.habits.select { |habit| habit.occurrences.find_by(date: selected_date).present? }
+
+    #@habits = current_user.habits.where('DATE(occurrence_date) = ?', selected_date)
 
     respond_to do |format|
       format.html { render :index }

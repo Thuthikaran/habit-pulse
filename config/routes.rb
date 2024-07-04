@@ -10,7 +10,11 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
-  resources :habits, only: %i[index new create edit update destroy]
+  resources :habits, only: %i[index new create edit update destroy] do
+    collection do
+      get :filter_by_date
+    end
+  end
   resources :habit_statics, only: %i[show]
 
   get 'contact', to: 'pages#contact'
@@ -22,5 +26,5 @@ Rails.application.routes.draw do
 
   get 'habits/today', to: 'habits#today'
 
-  get 'filter_by_date', on: :collection
+
 end
