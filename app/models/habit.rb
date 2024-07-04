@@ -17,6 +17,8 @@ class Habit < ApplicationRecord
 
   has_many :occurrences, dependent: :destroy
   has_one :habit_static, dependent: :destroy
+  belongs_to :user
+  has_many :habit_completions, dependent: :destroy
 
   # callback to create a habit_statics record when a habit is created
   after_create :create_habit_statics
