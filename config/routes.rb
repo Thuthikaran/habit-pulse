@@ -22,4 +22,5 @@ Rails.application.routes.draw do
 
   get 'habits/today', to: 'habits#today'
 
+  get 'filter_by_date', on: :collection
 end

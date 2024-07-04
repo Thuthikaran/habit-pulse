@@ -53,6 +53,16 @@ class HabitsController < ApplicationController
     @habits = current_user.habits.where("DATE(created_at) = ?", Date.today)
   end
 
+  def filter_by_date
+    selected_date = params[:date]
+    @habits = current_user.habits.where('DATE(occurrence_date) = ?', selected_date)
+
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: @habits }
+    end
+  end
+
   private
 
   def habit_params
