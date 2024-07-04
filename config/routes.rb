@@ -10,10 +10,12 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
-  resources :habits, only: %i[index new create]
+  resources :habits, only: %i[index new create edit update destroy]
   resources :habit_statics, only: %i[show]
+
   get 'contact', to: 'pages#contact'
   get 'about', to: 'pages#about'
+  get 'habits/:id/complete', to: 'habits#complete', as: 'complete_habit'
 
   post 'guest_login', to: 'sessions#guest_login'
   #get 'create', to:'habits#new'

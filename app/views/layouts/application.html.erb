@@ -8,38 +8,47 @@
   <%= csp_meta_tag %>
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   <%= javascript_importmap_tags %>
-  <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
 </head>
 <body>
   <%= render "shared/navbar" %>
   <%= render "shared/flashes" %>
 
-  <div class="container mt-5 text-left">
+  <div class="container-fluid mt-5 text-left">
     <div class="row">
-      <aside class="col-md-3">
-        <div class="sidebar">
-          <div class="profile-image-placeholder"></div>
-          <h3>@username</h3>
-          <p>Your progress: 744/744</p>
-          <p>Completion rate: 🏆</p>
-          <div class="mt-3">
-            <%= link_to "Create a habit", new_habit_path, class: "btn btn-outline-primary" %>
+    <%# if user not logged in hide sidebar %>
+
+      <div class="col-md-3" >
+        <div class="sidebar d-flex flex-column align-items-center  side-nav">
+
+          <div class="container-avatar">
+
+            <img class="avatar-large" alt="avatar-large" src="<%=  current_user&.photo.present? ? cl_image_path( current_user&.photo&.key) : asset_path('default_profile.png')  %>" />
+
+            <%= link_to  edit_user_registration_path do %>
+              <i class="fa-solid fa-pen-to-square "></i>
+            <% end %>
+          </div>
+
+          <div class="mb-5 mt-3 username"><%= "#{current_user.first_name } #{current_user.last_name}"%></div>
+
+          <p><span class="label">Your progress: </span><span class="user-progress">744/744</span></p>
+          <p><span class="label">Completion rate:</span> <span>100% 🏆</span></p>
+          <div class="mt-5">
+            <%= link_to "Create a habit", new_habit_path, class: "btn btn-primary" %>
           </div>
           <div class="mt-3">
-            <button type="button">View habits</button>
+            <%= link_to "View habits", habits_path, class: "btn btn-outline-primary mt-2" %>
           </div>
-          <div class="mt-3">
-            <p>share↗️</p>
-          </div>
-          <ul class="social-links">
-            <li><a href="https://www.facebook.com/" target="_blank">fb</a></li>
-          </ul>
+
         </div>
-      </aside>
+      </div>
       <main class="col-md-9">
         <%= yield %>
+        <%= turbo_frame_tag "remote_modal", target: "_top" %>
       </main>
     </div>
   </div>
+
+
 </body>
 </html>

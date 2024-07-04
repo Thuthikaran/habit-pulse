@@ -1,0 +1,23 @@
+
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-12 col-sm-8">
+      <h2>Edit Habit</h2>
+      <%= simple_form_for(@habit) do |f| %>
+      <div class="form-inputs">
+          <%= f.input :name %>
+          <%= f.input :priority, collection: [1,2,3] %>
+
+          <%= f.input :reminder %>
+
+          <%= f.input :category, collection: Habit::CATEGORIES  %>
+          <%= f.input :days_of_week %>
+        </div>
+        <div class="form-actions">
+          <%= f.submit  class: 'btn btn-primary'  %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
