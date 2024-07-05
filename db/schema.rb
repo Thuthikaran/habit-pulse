@@ -40,8 +40,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_02_184827) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
-
-
+  end
 
   create_table "habit_completions", force: :cascade do |t|
     t.bigint "habit_id", null: false
@@ -65,7 +64,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_02_184827) do
   create_table "habitlists", force: :cascade do |t|
     t.string "name"
     t.bigint "user_id", null: false
-    t.date "end_date"
+    t.date "due_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_habitlists_on_user_id"
