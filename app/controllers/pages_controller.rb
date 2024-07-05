@@ -3,10 +3,7 @@ class PagesController < ApplicationController
 
   def home
     if user_signed_in?
-      redirect_to habits_path
-    else
-      # Render the home page or redirect to another path as needed
-      render :home
+      redirect_to dashboard_path
     end
   end
 
