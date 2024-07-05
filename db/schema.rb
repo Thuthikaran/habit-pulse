@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_01_173220) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_02_184827) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,6 +42,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_01_173220) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "habit_completions", force: :cascade do |t|
+    t.bigint "habit_id", null: false
+    t.boolean "completed"
+    t.date "completed_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["habit_id"], name: "index_habit_completions_on_habit_id"
+  end
+
   create_table "habit_statics", force: :cascade do |t|
     t.bigint "habit_id", null: false
     t.integer "total_occurrences", default: 0
@@ -50,6 +59,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_01_173220) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["habit_id"], name: "index_habit_statics_on_habit_id"
+  end
+
+  create_table "habitlists", force: :cascade do |t|
+    t.string "name"
+    t.bigint "user_id", null: false
+    t.date "due_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_habitlists_on_user_id"
   end
 
   create_table "habits", force: :cascade do |t|
@@ -95,7 +113,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_01_173220) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "habit_completions", "habits"
   add_foreign_key "habit_statics", "habits"
+  add_foreign_key "habitlists", "users"
   add_foreign_key "habits", "users"
   add_foreign_key "occurrences", "habits"
 end
