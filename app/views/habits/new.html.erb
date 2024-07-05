@@ -1,0 +1,51 @@
+<div class="create-form-container">
+  <h2 class="create-habit"><span class="plus">+</span> Create a habit</h2>
+  <div class="date-display"><%= Time.now.strftime("< %d %b %Y >") %></div>
+
+
+  <%= simple_form_for(@habit, html: { novalidate: true }) do |f| %>
+
+    <div class="breakpoint">
+
+      <div class="habit-label-input">
+        <%= f.label :name, 'Habit', class: "habit-label-field" %>
+        <%= f.input :name, label: false, required: true %>
+      </div>
+
+      <div class="category-label-input">
+        <%= f.label :category, 'Category', class: "habit-label-field"  %>
+        <%= f.input :category, collection: Habit::CATEGORIES, label: false %>
+      </div>
+
+      <div class="frequency-container">
+        <label for="frequency" class="habit-label-field">Frequency</label>
+        <div id="frequency-options">
+          <% ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].each do |day| %>
+            <div class="checkbox-option">
+              <%= check_box_tag 'habit[days][]', day, false, id: "checkbox_#{day.downcase}" %>
+              <label for="checkbox_<%= day.downcase %>"><%= day %></label>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="reminder-label-input">
+        <%= f.label :reminder, 'Reminder', class: "habit-label-field" %>
+        <%= f.input :reminder, label: false %>
+      </div>
+
+      <div class="description-label-input">
+        <%= f.label :description, 'Description', class: "habit-label-field" %>
+        <%= f.input :description, label: false, as: :text,required: false %>
+      </div>
+
+    </div>
+
+
+
+    <%= f.submit 'submit', class: 'submit btn btn-danger px-5' %>
+    <%= f.submit 'cancel', class: 'cancel' %>
+
+  <% end %>
+
+</div>

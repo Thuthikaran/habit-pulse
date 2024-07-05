@@ -2,6 +2,9 @@ source "https://rubygems.org"
 
 ruby "3.1.2"
 #gem 'rubygems-update', '>= 3.3.22'
+gem 'faker'
+
+gem "cloudinary"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.3", ">= 7.1.3.3"
@@ -76,3 +79,5 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+

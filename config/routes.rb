@@ -10,13 +10,21 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
-  resources :habits, only: %i[index new create]
+  resources :habits, only: %i[index new create edit update destroy] do
+    collection do
+      get :filter_by_date
+    end
+  end
   resources :habit_statics, only: %i[show]
-  resources :habits, only: [:edit, :destroy]
 
   get 'contact', to: 'pages#contact'
-get 'about', to: 'pages#about'
+  get 'about', to: 'pages#about'
+  get 'habits/:id/complete', to: 'habits#complete', as: 'complete_habit'
 
-post 'guest_login', to: 'sessions#guest_login'
+  post 'guest_login', to: 'sessions#guest_login'
+  #get 'create', to:'habits#new'
+
+  get 'habits/today', to: 'habits#today'
+
 
 end
