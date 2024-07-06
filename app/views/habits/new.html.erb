@@ -10,11 +10,11 @@
 
   <%= simple_form_for(@habit, html: { novalidate: true }) do |f| %>
 
-    <div class="breakpoint">
+    <div class="breakpoint ">
 
-      <div class="habit-label-input">
-        <%= f.label :name, 'Habit', class: "habit-label-field" %>
-        <%= f.input :name, label: false, required: true %>
+      <div class="habit-label-input row">
+        <%= f.label :name, 'Habit', class: "habit-label-field col-2" %>
+        <%= f.input :name, label: false, required: true, class: "col-10" %>
       </div>
 
       <div class="category-label-input">
@@ -35,20 +35,23 @@
 </div>
 
 
-      <div class="reminder-label-input">
+      <div class="reminder-label-input mt-3">
         <%= f.label :reminder, 'Reminder', class: "habit-label-field" %>
-        <%= f.input :reminder, label: false %>
+        <%= f.input :reminder, as: :time, label: false %>
       </div>
 
       <div class="description-label-input">
         <%= f.label :description, 'Description', class: "habit-label-field" %>
         <%= f.input :description, label: false, as: :text,required: false %>
       </div>
+      <%= f.submit 'submit', class: 'btn btn-primary mt-3' %>
+      <%= f.submit 'cancel', class: 'btn btn-light' %>
 
     </div>
 
     <%= f.submit 'Submit', class: 'btn btn-primary px-4 py-2 rounded', style: 'background-color: #670BFF; transition: background 0.3s ease;' %>
     <%= f.submit 'Cancel', class: 'btn btn-secondary px-4 py-2 rounded ml-2' %>
+
 
 
   <% end %>
