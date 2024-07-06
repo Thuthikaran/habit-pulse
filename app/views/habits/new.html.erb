@@ -1,4 +1,4 @@
-<div class="create-form-container">
+<div class="create-form-container mt-0">
 <h2 class="create-habit">
   <span class="plus" style="color: #670BFF;">+</span> 
   Create a 
@@ -46,9 +46,10 @@
       </div>
 
     </div>
+    
+<%= f.submit 'Submit', class: 'btn btn-primary px-4 py-2 rounded', style: 'background-color: #670BFF; transition: background 0.3s ease; border-radius: 10px;' %>
+<%= f.submit 'Cancel', class: 'btn btn-secondary px-4 py-2 rounded ml-2', style: 'border-radius: 10px;' %>
 
-    <%= f.submit 'Submit', class: 'btn btn-primary px-4 py-2 rounded', style: 'background-color: #670BFF; transition: background 0.3s ease;' %>
-    <%= f.submit 'Cancel', class: 'btn btn-secondary px-4 py-2 rounded ml-2' %>
 
 
   <% end %>
