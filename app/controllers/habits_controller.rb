@@ -42,6 +42,7 @@ class HabitsController < ApplicationController
     @habit.frequency = 'daily'
     @habit.start_date = Date.today
     @habit.user = current_user
+    @habit.priority = 1
     if @habit.save
       redirect_to habits_path, notice: 'Habit was successfully created.'
     else

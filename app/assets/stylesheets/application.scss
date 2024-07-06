@@ -36,6 +36,22 @@
 
 .btn {
   border-width: 3px;
+  line-height: 2;
+  min-width: 173px;
+}
+.form-control, .form-select {
+
+  background-color: #F5F5F5;
+
+    line-height: 2;
+
+    font-weight: 400;
+    font-size: 1.2rem;
+    opacity: 0.9;
+    &:focus {
+      background-color: #F5F5F5;
+    }
+
 }
 
 .percentage-ring-container {

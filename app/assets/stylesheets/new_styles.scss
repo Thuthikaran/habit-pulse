@@ -1,0 +1,94 @@
+
+.create-form-container {
+    color: #333;
+    padding: 20px;
+    text-align: center;
+    /* Center align text inside the container */
+}
+
+.create-habit,
+.date-display {
+    margin-bottom: 20px;
+}
+
+.habit-label-field {
+    color: #000;
+    font-size: 32px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.habit-label-input,
+.category-label-input,
+.frequency-container,
+.reminder-label-input,
+.description-label-input {
+    display: grid;
+    grid-template-columns: 1 auto;
+    // align-items: center;
+    // margin-bottom: 10px;
+}
+
+.habit-label-field {
+    // flex: 0 0 150px;
+    text-align: left;
+    margin-right: 10px;
+    width: fit-content;
+}
+
+.habit-label-input input,
+.category-label-input select,
+.reminder-label-input input,
+.description-label-input textarea {
+    // flex: 1;
+}
+
+#frequency-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.checkbox-option {
+    display: flex;
+    align-items: center;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    /* Center align buttons horizontally */
+    margin-top: 20px;
+}
+
+.submit-btn,
+.cancel-btn {
+    margin: 0 10px;
+}
+
+.breakpoint {
+    padding-left: calc((100% - 500px) / 2); // Adjust 600px to match the max-width of .create-form-container
+}
+
+.bg-lavender  {
+    background-color: #F3F1FF;
+}
+
+.reminder-lavender {
+    background-color: #F3F1FF;
+}
+
+.plus {
+color: #670BFF
+}
+
+
+
+input, select {
+    box-sizing: border-box
+}
+
+
+
+.category-input {
+    background: red;
+}
