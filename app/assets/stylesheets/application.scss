@@ -45,15 +45,15 @@
 }
 .form-control, .form-select {
 
-  background-color: #C6CAED;
-    border-radius: 2rem;
+  background-color: #F5F5F5;
+
     line-height: 2;
 
     font-weight: 400;
     font-size: 1.2rem;
     opacity: 0.9;
     &:focus {
-      background-color: #C6CAED;
+      background-color: #F5F5F5;
     }
 
 }

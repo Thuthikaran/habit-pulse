@@ -1,14 +1,15 @@
 <div class="create-form-container">
 <h2 class="create-habit">
-  <span class="plus" style="color: #670BFF;">+</span> 
-  Create a 
+  <span class="plus" style="color: #670BFF;">+</span>
+  Create a
   <span class="plus" style="color: #670BFF;">habit</span>
 </h2>
 
   <div class="date-display"><%= Time.now.strftime("< %d %b %Y >") %></div>
 
 
-  <%= simple_form_for(@habit, html: { novalidate: true }) do |f| %>
+  <%= simple_form_for(@habit) do |f| %>
+    <%= f.error_notification %>
 
     <div class="breakpoint ">
 
@@ -23,16 +24,16 @@
       </div>
 
       <div class="frequency-container my-4">
-  <label for="frequency" class="form-label habit-label-field">Frequency</label>
-  <div id="frequency-options" class="d-flex flex-wrap">
-    <% ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].each do |day| %>
-      <div class="form-check me-3">
-        <%= check_box_tag 'habit[days][]', day, false, id: "checkbox_#{day.downcase}", class: "form-check-input" %>
-        <label for="checkbox_<%= day.downcase %>" class="form-check-label"><%= day %></label>
+        <label for="frequency" class="form-label habit-label-field">Frequency</label>
+        <div id="frequency-options" class="d-flex flex-wrap">
+          <% ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].each do |day| %>
+            <div class="form-check me-3">
+              <%= check_box_tag 'habit[days][]', day, false, id: "checkbox_#{day.downcase}", class: "form-check-input" %>
+              <label for="checkbox_<%= day.downcase %>" class="form-check-label"><%= day %></label>
+            </div>
+          <% end %>
+        </div>
       </div>
-    <% end %>
-  </div>
-</div>
 
 
       <div class="reminder-label-input mt-3">
@@ -44,8 +45,7 @@
         <%= f.label :description, 'Description', class: "habit-label-field" %>
         <%= f.input :description, label: false, as: :text,required: false %>
       </div>
-      <%= f.submit 'submit', class: 'btn btn-primary mt-3' %>
-      <%= f.submit 'cancel', class: 'btn btn-light' %>
+
 
     </div>
 
