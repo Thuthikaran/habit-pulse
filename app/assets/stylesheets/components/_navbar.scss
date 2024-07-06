@@ -11,23 +11,10 @@
   width: 40px;
 }
 
-.nav-button {
-  background-color: green;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 4px;
+.nav-button:hover {
+  background-color: #670BFF !important;
 }
 
-.nav-button:hover {
-  background-color: darkblue;
-}
 
 .home-button {
       background-color: lightgreen;
@@ -62,3 +49,4 @@
 body {
   background-color: #FAFAFA;
 }
+

@@ -8,6 +8,7 @@
   <%= csp_meta_tag %>
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   <%= javascript_importmap_tags %>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> <!
 </head>
 <body>
   <%= render "shared/navbar" %>
@@ -16,8 +17,8 @@
   <div class="container-fluid mt-5 text-left">
     <div class="row">
     <%# if user not logged in hide sidebar %>
-
-      <div class="col-md-3" <%= 'hidden' unless user_signed_in? %> >
+      
+      <div class="col-md-3" <%= 'hidden' unless user_signed_in?  %> >
         <div class="sidebar d-flex flex-column align-items-center  side-nav">
 
           <div class="container-avatar">
@@ -44,6 +45,23 @@
 
 
         </div>
+
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-12 text-center">
+      <div class="social-media">
+        <a href="#" class="mx-1" style="color: #3b5998;"><i class="fa fa-facebook"></i></a>
+        <a href="#" class="mx-1" style="color: #1da1f2;"><i class="fa fa-twitter"></i></a>
+        <a href="#" class="mx-1" style="color: #e4405f;"><i class="fa fa-instagram"></i></a>
+        <a href="#" class="mx-1" style="color: #0077b5;"><i class="fa fa-linkedin"></i></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
       </div>
       <main class="<%= current_user ? 'col-md-9' : 'col-md-12' %>">
         <%= yield %>
@@ -53,40 +71,10 @@
   </div>
 
 
-</body>
-</html>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Website with Footer</title>
-  <link rel="stylesheet" href="css/navbar.css"> <!-- Ensure the correct path to the CSS file -->
-  <link rel="stylesheet" href="css/footer.css"> <!-- Ensure the correct path to the footer CSS file -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> <!-- FontAwesome CSS -->
-</head>
-<body>
-  <nav>
-  </nav>
-
-  <div class="content">
-    <!-- Content goes here -->
-  </div>
-
-  <footer>
-    <div class="footer-content">
-      <p>&copy; 2024 HabitPulse. All rights reserved.</p>
-      <div class="social-media">
-        <a href="#"><i class="fa fa-facebook"></i></a>
-        <a href="#"><i class="fa fa-twitter"></i></a>
-        <a href="#"><i class="fa fa-instagram"></i></a>
-        <a href="#"><i class="fa fa-linkedin"></i></a>
-      </div>
-    </div>
-  </footer>
-
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/js/all.min.js"></script> <!-- Ensure the correct path to FontAwesome JS -->
+
 </body>
 </html>
+
+
 
