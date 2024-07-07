@@ -16,6 +16,7 @@
 
 <script> document.addEventListener("DOMContentLoaded", function() {
   const percentage = <%= @completion_percentage %>;
+  console.log(percentage);
   const percentageRing = document.getElementById('percentageRing');
   percentageRing.style.setProperty('--percentage', `${percentage}%`);
 });

@@ -1,7 +1,7 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <div class="container-fluid">
 
-<%= link_to root_path, class: "btn btn-primary", style: "background-color: #670BFF;" do %>
+<%= link_to root_path, class: "btn btn-primary", style: "background-color: #00bfff;" do %>
   HabitPulse
 <% end %>
 
@@ -31,13 +31,13 @@
           </li>
         <% else %>
           <li class="nav-item">
-            <%= link_to "Login", new_user_session_path, class: "btn btn-outline-dark nav-button" %>
+            <%= link_to "Login", new_user_session_path, class: "btn btn-primary nav-button nav-button",style: "background-color: #00bfff" %>
           </li>
           <li class="nav-item">
-            <%= link_to  "About us", about_path, class: "btn btn-outline-success nav-button"  %>
+            <%= link_to  "About us", about_path, class: "btn btn-primary nav-button nav-button", style: "background-color: #adff2f" %>
           </li>
           <li class="nav-item">
-            <%= link_to  "Contact", contact_path, class: "btn btn-primary nav-button nav-button"  %>
+            <%= link_to  "Contact", contact_path, class: "btn btn-primary nav-button nav-button",style: "background-color: #00bfff" %>
           </li>
         <% end %>
       </ul>
