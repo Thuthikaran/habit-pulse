@@ -1,167 +1,69 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
-if Rails.env.development?
-  Habit.destroy_all
-  User.destroy_all
-  Occurrence.destroy_all
-end
 def create_occurrences(habit)
+  # Calculate start date one week ago
+  start_date = 1.week.ago.to_date
+
   rand(1..5).times do
-    # create or update occurrence by date
-    occurrence = habit.occurrences.find_or_initialize_by(date: Faker::Date.between(from: habit.start_date,
-                                                                                   to: Date.today))
+    occurrence_date = Faker::Date.between(from: start_date, to: Date.today)
+    occurrence = habit.occurrences.find_or_initialize_by(date: occurrence_date)
     occurrence.completion_status = Occurrence::COMPLETION_STATUSES.sample
     occurrence.save!
   end
 end
 
+if Rails.env.development?
+  Habit.transaction do
+    puts 'Destroying all existing habits, occurrences, and users...'
 
+    # Destroy all existing habits, occurrences, and users
+    Habit.destroy_all
+    Occurrence.destroy_all
+    User.destroy_all
 
-# rubocop:disable Metrics/MethodLength
-def insert_habits
-  # create 10 habits with occurrences, at lest 4 habits with occurrences
-  habit = Habit.create!(name: 'Meditate',
-                        priority: rand(1..3),
-                        start_date: Faker::Date.between(from: 1.year.ago, to: Date.today), frequency: 'daily',
-                        status: 'active',
-                        user_id: User.all.sample.id,
-                        category: 'Mindfulness')
-  create_occurrences(habit)
+    puts 'Creating users...'
 
-  habit = Habit.create!(name: 'Read',
-    priority: rand(1..3),
-    start_date: Faker::Date.between(from: 1.year.ago, to: Date.today), frequency: 'daily',
-    status: 'active',
-    user_id: User.all.sample.id,
-    category: 'Learning')
+    # Create 5 users
+    users = [
+      { email: "pedro@mail.com", first_name: 'Pedro', last_name: 'Leal' },
+      { email: "thuthi@mail.com", first_name: 'Thuthikaran', last_name: 'Easvaran' },
+      { email: "sahba@mail.com", first_name: 'Sahba', last_name: 'Azhari' },
+      { email: "jeannine@mail.com", first_name: 'Jeannine', last_name: 'Vernon' },
+      { email: "markcarson121@gmail.com", first_name: 'Mark', last_name: 'Carson' }
+    ]
+    
+    users.each do |user_attrs|
+      User.create!(user_attrs.merge(
+        password: 'password',
+        password_confirmation: 'password'
+      ))
+    end
 
-  habit = Habit.create!(name: 'Exercise',
-    priority: rand(1..3),
-    start_date: Faker::Date.between(from: 1.year.ago, to: Date.today), frequency: 'daily',
-    status: 'active',
-    user_id: User.all.sample.id,
-    category: 'Health')
-  create_occurrences(habit)
+    puts 'Creating habits...'
 
-  habit = Habit.create!(name: 'Learn',
-    priority: rand(1..3),
-    start_date: Faker::Date.between(from: 1.year.ago, to: Date.today), frequency: 'daily',
-    status: 'active',
-    user_id: User.all.sample.id,
-    category: 'Learning')
+    # Define the 5 habits
+    habits = [
+      { name: 'Meditate', category: 'Mindfulness' },
+      { name: 'Exercise', category: 'Health' },
+      { name: 'Learn', category: 'Learning' },
+      { name: 'Write', category: 'Creativity' },
+      { name: 'Cook', category: 'Health' }
+    ]
 
-  habit = Habit.create!(name: 'Write',
-    priority: rand(1..3),
-    start_date: Faker::Date.between(from: 1.year.ago, to: Date.today), frequency: 'daily',
-    status: 'active',
-    user_id: User.all.sample.id,
-    category: 'Creativity')
-
-  habit = Habit.create!(name: 'Draw',
-    priority: rand(1..3),
-    start_date: Faker::Date.between(from: 1.year.ago, to: Date.today), frequency: 'daily',
-    status: 'active',
-    user_id: User.all.sample.id,
-    category: 'Creativity')
-
-  habit = Habit.create!(name: 'Cook',
-                        priority: rand(1..3),
-                        start_date: Faker::Date.between(from: 1.year.ago, to: Date.today), frequency: 'daily',
-                        status: 'active',
-                        user_id: User.all.sample.id,
-                        category: 'Health')
-
-  habit = Habit.create!(name: 'Code',
-                        priority: rand(1..3),
-                        start_date: Faker::Date.between(from: 1.year.ago, to: Date.today), frequency: 'weekly',
-                        days_of_week: ['Monday', 'Thursday'],
-                        status: 'active',
-                        user_id: User.all.sample.id,
-                        category: 'Learning')
-  create_occurrences(habit)
-
-  Habit.create!(
-    name: 'Dance',
-    priority: rand(1..3),
-    start_date: Faker::Date.between(from: 1.year.ago, to: Date.today),
-    frequency: 'weekly',
-    days_of_week: ['Tuesday', 'Friday'],
-    status: 'active',
-    user_id: User.all.sample.id,
-    category: 'Health'
-  )
-
-  habit = Habit.create!(
-    name: 'Take a cold shower',
-    priority: rand(1..3),
-    start_date: Faker::Date.between(from: 1.year.ago, to: Date.today),
-    frequency: 'daily',
-    status: 'active',
-    reminder: Faker::Time.between_dates(from: Date.today, to: Date.today, period: :morning),
-    user_id: User.all.sample.id,
-    category: 'Health'
-  )
-  create_occurrences(habit)
-end
-# rubocop:enable Metrics/MethodLength
-
-# create 5 users
-User.create!(email: "pedro@mail.com",
-             password: 'password',
-             password_confirmation: 'password',
-             first_name: 'Pedro',
-             last_name: 'Leal')
-
-User.create!(email: "thuthi@mail.com",
-             password: 'password',
-             password_confirmation: 'password',
-             first_name: 'Thuthikaran',
-             last_name: 'Easvaran')
-
-User.create!(email: "sahba@mail.com",
-             password: 'password',
-             password_confirmation: 'password',
-             first_name: 'Sahba',
-             last_name: 'Azhari')
-
-User.create!(email: "jeannine@mail.com",
-             password: 'password',
-             password_confirmation: 'password',
-             first_name: 'Jeannine',
-             last_name: 'Vernon')
-
-             # insert habits if environment is development
-# insert_habits if Rails.env.development?
-
-# create habit for each user with 7 consectutive occurrences (5 compelted, 2 missed) in the last 7 days
-User.all.each do |user|
-  habit = Habit.create!(name: 'Meditate for 10 minutes',
-                        priority: rand(1..3),
-                        start_date: Faker::Date.between(from: 1.year.ago, to: Date.today), frequency: 'daily',
-                        status: 'active',
-                        user_id: user.id,
-                        category: 'Mindfulness')
-  7.times do |i|
-    occurrence = habit.occurrences.find_or_initialize_by(date: Date.today - i)
-    occurrence.completion_status = i < 5 ? 'completed' : 'missed'
-    occurrence.save!
+    # Create habits for each user
+    User.all.each do |user|
+      habits.each do |habit_attrs|
+        habit = Habit.create!(
+          habit_attrs.merge(
+            priority: rand(1..3),
+            start_date: 1.week.ago.to_date,  # Start date one week ago
+            frequency: 'daily',
+            status: 'active',
+            user_id: user.id
+          )
+        )
+        create_occurrences(habit)
+      end
+    end
   end
-  habit = Habit.create!(name: 'Exercise for 20 minutes',
-                        priority: rand(1..3),
-                        start_date: Faker::Date.between(from: 1.year.ago, to: Date.today), frequency: 'daily',
-                        status: 'active',
-                        user_id: user.id,
-                        category: 'Health')
-  6.times do |i|
-    occurrence = habit.occurrences.find_or_initialize_by(date: Date.today - 1 - i)
-    occurrence.completion_status = i < 5 ? 'completed' : 'completed'
-    occurrence.save!
-  end
+
+  puts 'Seeding completed!'
 end
