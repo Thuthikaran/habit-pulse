@@ -1,22 +1,15 @@
 <!-- app/views/dashboard/index.html.erb -->
-<h1>Welcome, <%= current_user.first_name %></h1>
+<div class="container container-dashboard">
+  <h1>Welcome, <%= current_user.first_name %></h1>
+  <% if current_user.habits %>
+    <p class="text-active-habits">You have <%= current_user.habits.count %> active habits</p>
 
-<div class="scoreboard">
-  <h2>Today's Habit Completion</h2>
-  <p>Completed: <%= @completed_habits_today %> out of <%= @due_habits_today %> habits</p>
-  <p>Completion Percentage: <%= @completion_percentage %>%</p>
-   <link rel="stylesheet" href="style.css">
+  <% else %>
+    <div>
+    <%= link_to "Create a habit",  %>
+      <div class ="text-center">
+          You have no habtis
+      </div>
+    </div>
+  <% end %>
 </div>
-
-<div class="percentage-ring-container">
-  <div class="percentage-ring" id="percentageRing">
-    <div class="percentage-value" id="percentageValue"><%= @completion_percentage %>%</div>
-  </div>
-</div>
-
-<script> document.addEventListener("DOMContentLoaded", function() {
-  const percentage = <%= @completion_percentage %>;
-  const percentageRing = document.getElementById('percentageRing');
-  percentageRing.style.setProperty('--percentage', `${percentage}%`);
-});
-</script> 
