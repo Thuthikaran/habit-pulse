@@ -1,0 +1,30 @@
+<%= simple_form_for(habit) do |f| %>
+    <%= f.error_notification %>
+
+    <div class="breakpoint ">
+
+      <div class="habit-label-input">
+        <%= f.label :name, 'Habit', class: "habit-label-field col-2" %>
+        <%= f.input :name, label: false, required: true, class: "col-10" %>
+      </div>
+
+      <div class="category-label-input">
+        <%= f.label :category, 'Category', class: "habit-label-field"  %>
+        <%= f.input :category, collection: Habit::CATEGORIES, label: false %>
+      </div>
+
+      <div class="description-label-input">
+        <%= f.label :description, 'Description', class: "habit-label-field" %>
+        <%= f.input :description, label: false, as: :text,required: false %>
+      </div>
+
+
+    </div>
+
+  <%= f.submit 'Submit', class: 'btn btn-primary px-4 py-2 rounded', style: 'background-color: #670BFF; transition: background 0.3s ease; border-radius: 10px;' %>
+  <%= f.submit 'Cancel', class: 'btn btn-secondary px-4 py-2 rounded ml-2', style: 'border-radius: 10px;' %>
+
+
+
+
+  <% end %>
