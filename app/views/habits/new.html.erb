@@ -6,7 +6,7 @@
 </h2>
 
   <%# <div class="date-display"> %>
-    <%# <%= Time.now.strftime("< %d %b %Y >") %> 
+    <%# <%= Time.now.strftime("< %d %b %Y >") %>
     <%# </div> %>
 
 
@@ -32,9 +32,10 @@
 
 
     </div>
-    
+
   <%= f.submit 'Submit', class: 'btn btn-primary px-4 py-2 rounded', style: 'background-color: #670BFF; transition: background 0.3s ease; border-radius: 10px;' %>
-  <%= f.submit 'Cancel', class: 'btn btn-secondary px-4 py-2 rounded ml-2', style: 'border-radius: 10px;' %>
+
+  <%= link_to 'Cancel', habits_path, class: 'btn btn-secondary px-4 py-2 rounded ml-2', style: 'border-radius: 10px;' %>
 
 
 
@@ -44,24 +45,24 @@
 </div>
 
 
-<%# 
+<%#
 <div class="frequency-container my-4">
   <label for="frequency" class="form-label habit-label-field">Frequency</label>
   <div id="frequency-options" class="d-flex flex-wrap">
     <% ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].each do |day| %>
       <%# <div class="form-check me-3"> %>
-        <%# <%= check_box_tag 'habit[days][]', day, false, id: "checkbox_#{day.downcase}", class: "form-check-input" %> 
+        <%# <%= check_box_tag 'habit[days][]', day, false, id: "checkbox_#{day.downcase}", class: "form-check-input" %>
         <%# <label for="checkbox_<%= day.downcase %>
         <%# " class="form-check-label"><%= day %>
         <%# </label>  %>
       <%# </div> %>
-    <%# <% end %> 
+    <%# <% end %>
   <%# </div> %>
 <%# </div> %>
 
 
 
       <%# <div class="reminder-label-input mt-3"> %>
-        <%# <%= f.label :reminder, 'Reminder', class: "habit-label-field" %> 
-        <%# <%= f.input :reminder, as: :time, label: false %> 
+        <%# <%= f.label :reminder, 'Reminder', class: "habit-label-field" %>
+        <%# <%= f.input :reminder, as: :time, label: false %>
       <%# </div> %>
