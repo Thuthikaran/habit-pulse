@@ -1,4 +1,4 @@
-<%= simple_form_for(habit) do |f| %>
+ <%= simple_form_for(habit) do |f| %>
     <%= f.error_notification %>
 
     <div class="breakpoint ">
@@ -21,8 +21,9 @@
 
     </div>
 
-  <%= f.submit 'Submit', class: 'btn btn-primary px-4 py-2 rounded', style: 'background-color: #670BFF; transition: background 0.3s ease; border-radius: 10px;' %>
-  <%= f.submit 'Cancel', class: 'btn btn-secondary px-4 py-2 rounded ml-2', style: 'border-radius: 10px;' %>
+    <%= f.submit 'Submit', class: 'btn btn-primary px-4 py-2 rounded', style: 'background-color: #670BFF; transition: background 0.3s ease; border-radius: 10px;' %>
+
+    <%= link_to 'Cancel', habits_path, class: 'btn btn-secondary px-4 py-2 rounded ml-2', style: 'border-radius: 10px;' %>
 
 
 
