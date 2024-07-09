@@ -23,24 +23,6 @@
         <%= f.input :category, collection: Habit::CATEGORIES, label: false %>
       </div>
 
-      <div class="frequency-container my-4">
-        <label for="frequency" class="form-label habit-label-field">Frequency</label>
-        <div id="frequency-options" class="d-flex flex-wrap">
-          <% ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].each do |day| %>
-            <div class="form-check me-3">
-              <%= check_box_tag 'habit[days][]', day, false, id: "checkbox_#{day.downcase}", class: "form-check-input" %>
-              <label for="checkbox_<%= day.downcase %>" class="form-check-label"><%= day %></label>
-            </div>
-          <% end %>
-        </div>
-      </div>
-
-
-      <div class="reminder-label-input mt-3">
-        <%= f.label :reminder, 'Reminder', class: "habit-label-field" %>
-        <%= f.input :reminder, as: :time, label: false %>
-      </div>
-
       <div class="description-label-input">
         <%= f.label :description, 'Description', class: "habit-label-field" %>
         <%= f.input :description, label: false, as: :text,required: false %>
@@ -58,3 +40,5 @@
   <% end %>
 
 </div>
+
+
