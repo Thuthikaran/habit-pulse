@@ -39,9 +39,15 @@
           <div class="mt-5">
             <%= link_to "Create a habit", new_habit_path, class: "btn btn-primary px-4 py-2 rounded", style: "background-color: #670BFF; transition: background 0.3s ease;" %>
           </div>
+          <% if controller_name == 'habits' && action_name == 'index' %>
+            <div class="mt-3">
+              <%= link_to "View dashboard", root_path, class: "btn btn-outline-primary px-4 py-2 rounded mt-2", style: "color: #670BFF; border-color: #670BFF;" %>
+            </div>
+          <% else %>
           <div class="mt-3">
             <%= link_to "View habits", habits_path, class: "btn btn-outline-primary px-4 py-2 rounded mt-2", style: "color: #670BFF; border-color: #670BFF;" %>
           </div>
+          <% end %>
 
 
         </div>
