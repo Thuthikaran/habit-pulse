@@ -37,12 +37,12 @@ class Habit < ApplicationRecord
     end_date = self.end_date || self.start_date + 1.year
     if self.frequency == 'daily'
       (self.start_date..end_date).each do |date|
-        self.occurrences.create(date: date)
+        Occurrence.create(date: date, habit: self)
       end
     elsif self.frequency == 'weekly'
       (self.start_date..end_date).each do |date|
         if self.days_of_week.include?(date.strftime('%A'))
-          self.occurrences.create(date: date)
+          Occurrence.create(date: date, habit: self)
         end
       end
     end

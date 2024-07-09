@@ -4,7 +4,7 @@ def create_occurrences(habit)
 
   rand(1..5).times do
     occurrence_date = Faker::Date.between(from: start_date, to: Date.today)
-    occurrence = habit.occurrences.find_or_initialize_by(date: occurrence_date)
+    occurrence = Occurrence.new(date: occurrence_date, habit: habit)
     occurrence.completion_status = Occurrence::COMPLETION_STATUSES.sample
     occurrence.save!
   end
@@ -29,7 +29,7 @@ if Rails.env.development?
       { email: "jeannine@mail.com", first_name: 'Jeannine', last_name: 'Vernon' },
       { email: "markcarson121@gmail.com", first_name: 'Mark', last_name: 'Carson' }
     ]
-    
+
     users.each do |user_attrs|
       User.create!(user_attrs.merge(
         password: 'password',

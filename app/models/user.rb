@@ -4,12 +4,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-        has_many :habits, dependent: :destroy
-        has_many :habit_completions, through: :habits
+  has_many :habits, dependent: :destroy
+  has_many :habit_completions, through: :habits
 
-        has_one_attached :photo
-
-
+  has_one_attached :photo
 
   def habits_due_today
     habits.where(end_date: Date.today)
