@@ -1,5 +1,6 @@
 <h2 class="mb-5 text-center"><%= @habit_static.habit.name %></h2>
-
+<p><%= @habit_static.habit.description %></p>
+<p>Started habit: <%= @habit_static.habit.start_date %></p>
 <div class="row g-3">
   <div class="col-md-6">
     <div class="border border-black p-3">
@@ -23,16 +24,19 @@
 <% if @habit_static.total_occurrences.to_i > 0 %>
 <h3 class="text-center mt-5 m-3">Habit Score</h3>
 
-<div class="border border-5 border-primary rounded-circle text-center m-auto d-flex align-items-center justify-content-center score">
-   <h3><strong>
-    <%# format number below %>
-
-
-   <%= ((@habit_static.completed_occurrences ).to_f  / (@habit_static.total_occurrences ) * 100).to_i %>
-   </strong>
-   </h3>
+<div class="percentage-ring-container text-center d-flex m-auto">
+  <div class="percentage-ring" id="percentageRing">
+    <div class="percentage-value" 
+         id="percentageValue" 
+         data-percentage="<%= ((@habit_static.completed_occurrences ).to_f  / (@habit_static.total_occurrences ) * 100).to_i %>">
+    <%= ((@habit_static.completed_occurrences ).to_f  / (@habit_static.total_occurrences ) * 100).to_i %>%
+    </div>
+  </div>
 </div>
+
 <div class="text-end">
   <%= link_to "Return", habits_path, class: "btn btn-outline-primary mt-5" %>
 </div>
 <% end %>
+
+<%= javascript_include_tag 'progressRing' %> 
