@@ -1,4 +1,4 @@
- <div class="div" data-controller="frequency">
+ <div class="div">
   <%= simple_form_for(habit) do |f| %>
       <%= f.error_notification %>
 
@@ -31,12 +31,12 @@
 
         <div class="start-date-label-input">
           <%= f.label :start_date, 'Start date', class: "habit-label-field" %>
-          <%= f.input :start_date, label: false %>
+          <%= f.input :start_date, label: false, as: :string, input_html: { data: { controller: "datepicker" } } %>
         </div>
 
         <div class="end-date-label-input">
           <%= f.label :end_date, 'End date', class: "habit-label-field" %>
-          <%= f.input :end_date, label: false %>
+          <%= f.input :end_date, label: false, as: :string, input_html: { data: { controller: "datepicker" } } %>
         </div>
 
       </div>
