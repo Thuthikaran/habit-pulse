@@ -5,9 +5,9 @@
     <%# <div>
       <label for="date">Select Date:</label>
       <%= date_field_tag :date, params[:date] %>
-      <%# <%= submit_tag 'Filter' %> 
-    <%# </div> %> 
-  <%# <% end %> 
+      <%# <%= submit_tag 'Filter' %>
+    <%# </div> %>
+  <%# <% end %>
   <div class="row">
     <% @habits.each do |habit| %>
       <div class="col-12 mb-3">
@@ -22,7 +22,7 @@
               <% if habit.today_occurrence.completion_status == 'completed' %>
                 <button class="btn btn-outline-primary complete-btn mr-2" disabled data-habit-id="<%= habit.id %>">Completed</button>
               <% elsif habit.today_occurrence.completion_status == 'pending' %>
-                <%= link_to 'Complete' ,complete_habit_path(habit.id) ,method: 'patch' %>
+                <%= link_to 'Complete' ,complete_habit_path(habit.today_occurrence.id) ,method: 'patch' %>
               <% end %>
              <div class="dropdown ms-2">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton<%= habit.id %>" data-bs-toggle="dropdown" aria-expanded="false">

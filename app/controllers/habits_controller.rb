@@ -21,18 +21,12 @@ class HabitsController < ApplicationController
 
   def index
     # get habits that have occurrences for today
+    # renamed this to today_occurrences for clarification!
     @habits = current_user.habits.select { |habit| habit.today_occurrence.present? }
-
   end
 
   def new
     @habit = Habit.new
-  end
-
-  def complete
-    @habit = Habit.find(params[:id])
-    @habit.occurrences.find_by(date: Date.today).update(completion_status: 'completed')
-    redirect_to habits_path, notice: 'Habit was successfully completed.'
   end
 
   def create

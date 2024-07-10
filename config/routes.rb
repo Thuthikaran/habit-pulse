@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 
   get 'contact', to: 'pages#contact'
   get 'about', to: 'pages#about'
-  get 'habits/:id/complete', to: 'habits#complete', as: 'complete_habit'
+  get 'occurrences/:id/complete', to: 'occurrences#complete', as: 'complete_habit'
   get 'dashboard', to: 'dashboard#index'
 
   post 'guest_login', to: 'sessions#guest_login'
