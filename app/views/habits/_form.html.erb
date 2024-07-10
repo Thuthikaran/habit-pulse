@@ -1,45 +1,44 @@
- <%= simple_form_for(habit) do |f| %>
-    <%= f.error_notification %>
+ <div class="div" data-controller="frequency">
+  <%= simple_form_for(habit) do |f| %>
+      <%= f.error_notification %>
 
-    <div class="breakpoint ">
+      <div class="breakpoint">
 
-      <div class="habit-label-input">
-        <%= f.label :name, 'Habit', class: "habit-label-field col-2" %>
-        <%= f.input :name, label: false, required: true, class: "col-10" %>
+        <div class="habit-label-input">
+          <%= f.label :name, 'Habit', class: "habit-label-field col-2" %>
+          <%= f.input :name, label: false, required: true, class: "col-10" %>
+        </div>
+
+        <div class="category-label-input">
+          <%= f.label :category, 'Category', class: "habit-label-field"  %>
+          <%= f.input :category, collection: Habit::CATEGORIES, label: false %>
+        </div>
+
+        <div class="description-label-input">
+          <%= f.label :description, 'Description', class: "habit-label-field" %>
+          <%= f.input :description, label: false, as: :text,required: false %>
+        </div>
+
+        <div class="frequency-label-input">
+          <%= f.label :frequency, 'Frequency', class: "habit-label-field" %>
+          <%= f.input :frequency, collection: Habit::FREQUENCIES, label: false, input_html: { data: { target: "frequency.frequency", action: "change->frequency#toggleDaysOfWeek" } } %>
+        </div>
+
+        <div class="days-label-input d-none" data-target="frequency.daysOfWeek">
+          <%= f.label :days_of_week, 'Days of the week', class: "habit-label-field" %>
+          <%= f.input :days_of_week, collection: Habit::DAYS_OF_WEEK, as: :select, input_html: { multiple: true }, label: false %>
+        </div>
+
+        <div class="end-date-label-input">
+          <%= f.label :end_date, 'End date', class: "habit-label-field" %>
+          <%= f.input :end_date, label: false %>
+        </div>
+
       </div>
 
-      <div class="category-label-input">
-        <%= f.label :category, 'Category', class: "habit-label-field"  %>
-        <%= f.input :category, collection: Habit::CATEGORIES, label: false %>
-      </div>
+      <%= f.submit 'Submit', class: 'btn btn-primary px-4 py-2 rounded', style: 'background-color: #670BFF; transition: background 0.3s ease; border-radius: 10px;' %>
 
-      <div class="description-label-input">
-        <%= f.label :description, 'Description', class: "habit-label-field" %>
-        <%= f.input :description, label: false, as: :text,required: false %>
-      </div>
+      <%= link_to 'Cancel', habits_path, class: 'btn btn-secondary px-4 py-2 rounded ml-2', style: 'border-radius: 10px;' %>
 
-      <div class="frequency-label-input">
-        <%= f.label :frequency, 'Frequency', class: "habit-label-field" %>
-        <%= f.input :frequency, collection: Habit::FREQUENCIES, label: false %>
-      </div>
-
-      <div class="days-label-input">
-        <%= f.label :days_of_week, 'Days of the week', class: "habit-label-field" %>
-        <%= f.input :days_of_week, collection: Habit::DAYS_OF_WEEK, as: :select, input_html: { multiple: true }, label: false %>
-      </div>
-
-      <div class="end-date-label-input">
-        <%= f.label :end_date, 'End date', class: "habit-label-field" %>
-        <%= f.input :end_date, label: false %>
-      </div>
-
-    </div>
-
-    <%= f.submit 'Submit', class: 'btn btn-primary px-4 py-2 rounded', style: 'background-color: #670BFF; transition: background 0.3s ease; border-radius: 10px;' %>
-
-    <%= link_to 'Cancel', habits_path, class: 'btn btn-secondary px-4 py-2 rounded ml-2', style: 'border-radius: 10px;' %>
-
-
-
-
-  <% end %>
+    <% end %>
+ </div>
