@@ -18,6 +18,20 @@
         <%= f.input :description, label: false, as: :text,required: false %>
       </div>
 
+      <div class="frequency-label-input">
+        <%= f.label :frequency, 'Frequency', class: "habit-label-field" %>
+        <%= f.input :frequency, collection: Habit::FREQUENCIES, label: false %>
+      </div>
+
+      <div class="days-label-input">
+        <%= f.label :days_of_week, 'Days of the week', class: "habit-label-field" %>
+        <%= f.input :days_of_week, collection: Habit::DAYS_OF_WEEK, as: :select, input_html: { multiple: true }, label: false %>
+      </div>
+
+      <div class="end-date-label-input">
+        <%= f.label :end_date, 'End date', class: "habit-label-field" %>
+        <%= f.input :end_date, label: false %>
+      </div>
 
     </div>
 
