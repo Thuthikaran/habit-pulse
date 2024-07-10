@@ -51,15 +51,16 @@ class Habit < ApplicationRecord
   private
 
   def create_occurrences
-    start_date = Date.today
+    start_date = self.start_date
+    end_date = self.end_date
 
     if self.frequency == 'daily'
-      (start_date...(start_date + 1.months)).each do |date|
+      (start_date...end_date).each do |date|
         Occurrence.create(date: date, habit: self)
       end
     elsif self.frequency == 'weekly'
       # days_of_week_array = days_of_week.map(&:to_s)
-      (start_date...(start_date + 6.months)).each do |date|
+      (start_date...end_date).each do |date|
         if self.days_of_week.include?(date.strftime('%A'))
           Occurrence.create(date: date, habit: self)
         end
@@ -81,15 +82,3 @@ class Habit < ApplicationRecord
   end
 
 end
-
-# def create_occurrences(habit)
-#   # Calculate start date one week ago
-#   start_date = 1.week.ago.to_date
-
-#   rand(1..5).times do
-#     occurrence_date = Faker::Date.between(from: start_date, to: Date.today)
-#     occurrence = Occurrence.new(date: occurrence_date, habit: habit)
-#     occurrence.completion_status = Occurrence::COMPLETION_STATUSES.sample
-#     occurrence.save!
-#   end
-# end
