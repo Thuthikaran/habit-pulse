@@ -5,12 +5,12 @@
       <div class="breakpoint" data-controller="frequency">
 
         <div class="habit-label-input">
-          <%= f.label :name, 'Habit', class: "habit-label-field col-2" %>
+          <%= f.label :name, 'Habit', class: "habit-label-field col-2 mb-2" %>
           <%= f.input :name, label: false, required: true, class: "col-10" %>
         </div>
 
         <%= f.label :name, 'Category', class: "habit-label-field col-2 mb-2" %>
-        <div class="category-icons" data-controller="category-selector">
+        <div class="category-icons mb-2" data-controller="category-selector">
           <%= f.hidden_field :category, value: f.object.category, data: { target: "category-selector.categoryInput" } %>
           <% Habit::CATEGORIES.each do |category, icon_class| %>
             <div class="icon-div">
@@ -25,27 +25,47 @@
         </div>
 
         <div class="description-label-input">
-          <%= f.label :description, 'Description', class: "habit-label-field" %>
+          <%= f.label :description, 'Description', class: "habit-label-field mb-2" %>
           <%= f.input :description, label: false, as: :text,required: false %>
         </div>
 
-        <div class="frequency-label-input">
-          <%= f.label :frequency, 'Frequency', class: "habit-label-field" %>
-          <%= f.input :frequency, collection: Habit::FREQUENCIES, label: false, input_html: { data: { target: "frequency.frequency", action: "change->frequency#toggleDaysOfWeek" } } %>
-        </div>
+      <div class="frequency-label-input" data-controller="frequency-selector">
+        <%= f.label :frequency, 'Frequency', class: "habit-label-field mb-2" %>
+        <%= f.hidden_field :frequency, value: f.object.frequency, data: { target: "frequency-selector.frequencyInput" } %>
 
-        <div class="days-label-input d-none" data-target="frequency.daysOfWeek">
-          <%= f.label :days_of_week, 'Days of the week', class: "habit-label-field" %>
-          <%= f.input :days_of_week, collection: Habit::DAYS_OF_WEEK, as: :select, input_html: { multiple: true }, label: false %>
+        <div class="frequency-pills mb-2">
+          <% Habit::FREQUENCIES.each do |frequency| %>
+            <div class="frequency-pill" data-frequency-selector-target="pill"
+                 data-action="click->frequency-selector#toggleFrequency"
+                 data-frequency="<%= frequency %>">
+              <span><%= frequency.capitalize %></span>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+        <div class="days-label-input d-none" data-controller="days-selector" data-target="frequency.daysOfWeek">
+          <%= f.label :days_of_week, 'Days of the week', class: "habit-label-field mb-2" %>
+          <%= f.hidden_field :days_of_week, value: f.object.days_of_week.join(','), data: { target: "days-selector.daysInput" } %>
+
+          <div class="days-pills mb-2">
+            <% Habit::DAYS_OF_WEEK.each do |day| %>
+              <div class="day-pill" data-days-selector-target="pill"
+                   data-action="click->days-selector#toggleDay"
+                   data-day="<%= day %>">
+                <span><%= day %></span>
+              </div>
+            <% end %>
+          </div>
         </div>
 
         <div class="start-date-label-input">
-          <%= f.label :start_date, 'Start date', class: "habit-label-field" %>
+          <%= f.label :start_date, 'Start date', class: "habit-label-field mb-2" %>
           <%= f.input :start_date, label: false, as: :string, input_html: { data: { controller: "datepicker" } } %>
         </div>
 
         <div class="end-date-label-input">
-          <%= f.label :end_date, 'End date', class: "habit-label-field" %>
+          <%= f.label :end_date, 'End date', class: "habit-label-field mb-2" %>
           <%= f.input :end_date, label: false, as: :string, input_html: { data: { controller: "datepicker" } } %>
         </div>
 
