@@ -46,7 +46,7 @@
 
         <div class="days-label-input d-none" data-controller="days-selector" data-target="frequency.daysOfWeek">
           <%= f.label :days_of_week, 'Days of the week', class: "habit-label-field mb-2" %>
-          <%= f.hidden_field :days_of_week, value: f.object.days_of_week.join(','), data: { target: "days-selector.daysInput" } %>
+          <%= f.hidden_field :days_of_week, data: { target: "days-selector.daysInput" } %>
 
           <div class="days-pills mb-2">
             <% Habit::DAYS_OF_WEEK.each do |day| %>

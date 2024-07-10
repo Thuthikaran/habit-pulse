@@ -33,8 +33,8 @@ class HabitsController < ApplicationController
 
     @habit = Habit.new(habit_params)
     @habit.status = 'active'
-    @habit.start_date = Date.today
     @habit.user = current_user
+    @habit.days_of_week = habit_params[:days_of_week].split(',')
     @habit.priority = 1
     if @habit.save
       redirect_to habits_path, notice: 'Habit was successfully created.'
@@ -61,17 +61,13 @@ class HabitsController < ApplicationController
     end
   end
 
+
   private
 
   def habit_params
-    params.require(:habit).permit(:name, :details, days: [])
+    params.require(:habit).permit(:name, :priority, :start_date, :end_date, :reminder, :frequency, :status, :category, :description, :days_of_week)
   end
 
-  private
-
- def habit_params
-    params.require(:habit).permit(:name, :priority, :start_date, :end_date, :reminder, :frequency, :status, :category, :description, days_of_week: [])
-  end
   def set_habit
     @habit = Habit.find(params[:id])
   end
