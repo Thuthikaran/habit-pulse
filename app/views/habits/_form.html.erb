@@ -2,16 +2,26 @@
   <%= simple_form_for(habit) do |f| %>
       <%= f.error_notification %>
 
-      <div class="breakpoint">
+      <div class="breakpoint" data-controller="frequency">
 
         <div class="habit-label-input">
           <%= f.label :name, 'Habit', class: "habit-label-field col-2" %>
           <%= f.input :name, label: false, required: true, class: "col-10" %>
         </div>
 
-        <div class="category-label-input">
-          <%= f.label :category, 'Category', class: "habit-label-field"  %>
-          <%= f.input :category, collection: Habit::CATEGORIES, label: false %>
+        <%= f.label :name, 'Category', class: "habit-label-field col-2 mb-2" %>
+        <div class="category-icons" data-controller="category-selector">
+          <%= f.hidden_field :category, value: f.object.category, data: { target: "category-selector.categoryInput" } %>
+          <% Habit::CATEGORIES.each do |category, icon_class| %>
+            <div class="icon-div">
+              <div class="category-icon" data-category-selector-target="icon"
+                  data-action="click->category-selector#selectCategory"
+                  data-category="<%= category %>">
+                <i class="<%= icon_class %>"></i>
+              </div>
+                <span><%= category %></span>
+            </div>
+          <% end %>
         </div>
 
         <div class="description-label-input">

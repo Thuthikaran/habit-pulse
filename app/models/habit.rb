@@ -1,8 +1,23 @@
 class Habit < ApplicationRecord
   FREQUENCIES = %w[daily weekly].freeze
   STATUSES = %w[active inactive].freeze
-  CATEGORIES = ["Health", "Creativity", "Learning", "Mindfulness", "Quit a bad habit", "Art",
-                "Sports", "Entertainment", "Social", "Finance", "Work", "Nutrition", "Home", "Outdoor"].freeze
+  CATEGORIES = {
+    "Health" => "fas fa-heartbeat",
+    "Creativity" => "fas fa-lightbulb",
+    "Learning" => "fas fa-book",
+    "Mindfulness" => "fas fa-spa",
+    "Quit a bad habit" => "fas fa-ban",
+    "Art" => "fas fa-paint-brush",
+    "Sports" => "fas fa-basketball-ball",
+    "Entertainment" => "fas fa-film",
+    "Social" => "fas fa-users",
+    "Finance" => "fas fa-dollar-sign",
+    "Work" => "fas fa-briefcase",
+    "Nutrition" => "fas fa-apple-alt",
+    "Home" => "fas fa-home",
+    "Outdoor" => "fas fa-tree"
+  }.freeze
+
   DAYS_OF_WEEK = %w[Monday Tuesday Wednesday Thursday Friday Saturday Sunday].freeze
 
   belongs_to :user
