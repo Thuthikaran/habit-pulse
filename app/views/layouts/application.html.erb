@@ -8,7 +8,7 @@
   <%= csp_meta_tag %>
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   <%= javascript_importmap_tags %>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> <!
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
   <%= render "shared/navbar" %>
@@ -16,53 +16,64 @@
 
   <div class="container-fluid mt-5 text-left">
     <div class="row">
-    <%# if user not logged in hide sidebar %>
-      
-      <div class="col-md-3" <%= 'hidden' unless user_signed_in?  %> >
-        <div class="sidebar d-flex flex-column align-items-center  side-nav">
+      <%# if user not logged in hide sidebar %>
+      <% if current_user %>
+        <div class="col-md-3">
+          <div class="sidebar d-flex flex-column align-items-center side-nav">
+            <div class="container-avatar">
+              <% if current_user && current_user.photo.present? %>
+                <%= cl_image_tag current_user.photo.key, class: "avatar-large" %>
+              <% else %>
+                <%= image_tag "default_profile.png", class: "avatar-large", alt: "dropdown menu" %>
+              <% end %>
+              <%= link_to edit_user_registration_path, hidden: true do %>
+                <i class="fa-solid fa-pen-to-square"></i>
+              <% end %>
+            </div>
 
-          <div class="container-avatar">
+            <% if current_user %>
+              <div class="mb-5 mt-3 username">
+                <%= "#{current_user.first_name} #{current_user.last_name}" %>
+              </div>
+            <% end %>
+            <p>
+              <span class="label">Your progress: </span>
+              <span class="user-progress">744/744</span>
+            </p>
+            <p>
+              <span class="label">Completion rate: </span>
+              <span>100% 🏆</span>
+            </p>
 
-            <img class="avatar-large" alt="avatar-large" src="<%=  current_user&.photo.present? ? cl_image_path( current_user&.photo&.key) : asset_path('default_profile.png')  %>" />
-
-            <%= link_to  edit_user_registration_path do %>
-              <i class="fa-solid fa-pen-to-square "></i>
+            <div class="mt-5">
+              <%= link_to "Create a habit", new_habit_path, class: "btn btn-primary px-4 py-2 rounded", style: "background-color: #670BFF; transition: background 0.3s ease;" %>
+            </div>
+            <% if controller_name == 'habits' && action_name == 'index' %>
+              <div class="mt-3">
+                <%= link_to "View dashboard", root_path, class: "btn btn-outline-primary px-4 py-2 rounded mt-2", style: "color: #670BFF; border-color: #670BFF;" %>
+              </div>
+            <% else %>
+              <div class="mt-3">
+                <%= link_to "View habits", habits_path, class: "btn btn-outline-primary px-4 py-2 rounded mt-2", style: "color: #670BFF; border-color: #670BFF;" %>
+              </div>
             <% end %>
           </div>
 
-          <% if current_user %>
-            <div class="mb-5 mt-3 username"><%= "#{current_user.first_name } #{current_user.last_name}"%></div>
-          <% end %>
-          <p><span class="label">Your progress: </span><span class="user-progress">744/744</span></p>
-          <p><span class="label">Completion rate:</span> <span>100% 🏆</span></p>
-
-<div class="mt-5">
-  <%= link_to "Create a habit", new_habit_path, class: "btn btn-primary px-4 py-2 rounded", style: "background-color: #670BFF; transition: background 0.3s ease;" %>
-</div>
-<div class="mt-3">
-  <%= link_to "View habits", habits_path, class: "btn btn-outline-primary px-4 py-2 rounded mt-2", style: "color: #670BFF; border-color: #670BFF;" %>
-</div>
-
-
+          <div class="container mt-4">
+            <div class="row">
+              <div class="col-12 text-center">
+                <div class="social-media">
+                  <a href="#" class="mx-1" style="color: #3b5998;"><i class="fa fa-facebook"></i></a>
+                  <a href="#" class="mx-1" style="color: #1da1f2;"><i class="fa fa-twitter"></i></a>
+                  <a href="#" class="mx-1" style="color: #e4405f;"><i class="fa fa-instagram"></i></a>
+                  <a href="#" class="mx-1" style="color: #0077b5;"><i class="fa fa-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      <% end %>
 
-<div class="container mt-4">
-  <div class="row">
-    <div class="col-12 text-center">
-      <div class="social-media">
-        <a href="#" class="mx-1" style="color: #3b5998;"><i class="fa fa-facebook"></i></a>
-        <a href="#" class="mx-1" style="color: #1da1f2;"><i class="fa fa-twitter"></i></a>
-        <a href="#" class="mx-1" style="color: #e4405f;"><i class="fa fa-instagram"></i></a>
-        <a href="#" class="mx-1" style="color: #0077b5;"><i class="fa fa-linkedin"></i></a>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-
-      </div>
       <main class="<%= current_user ? 'col-md-9' : 'col-md-12' %>">
         <%= yield %>
         <%= turbo_frame_tag "remote_modal", target: "_top" %>
@@ -70,11 +81,6 @@
     </div>
   </div>
 
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/js/all.min.js"></script> <!-- Ensure the correct path to FontAwesome JS -->
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/js/all.min.js"></script>
 </body>
 </html>
-
-
-
