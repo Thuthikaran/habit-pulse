@@ -34,6 +34,9 @@ class Habit < ApplicationRecord
   # callback to create occurrences for a habit based on frequency, between start_date and end_date, if end_date is nil then it is set to 1 year from start_date
   after_create :create_occurrences
 
+  #callback to delete and recreate future occurrences starting from today when a habit is updated, if frequency changed
+  after_update :delete_and_recreate_occurrences
+
   # get today's occurrence
   def today_occurrence
     occurrences.find_by(date: Date.today)
@@ -60,6 +63,15 @@ class Habit < ApplicationRecord
           Occurrence.create(date: date, habit: self)
         end
       end
+    end
+  end
+
+  def delete_and_recreate_occurrences
+
+    if self.saved_change_to_frequency || self.saved_change_to_days_of_week
+
+      self.occurrences.where('date >= ? AND completion_status = ?', Date.today, 'pending').destroy_all
+      create_occurrences
     end
   end
 
