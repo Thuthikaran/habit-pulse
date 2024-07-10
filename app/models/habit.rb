@@ -1,7 +1,8 @@
 class Habit < ApplicationRecord
   FREQUENCIES = %w[daily weekly].freeze
   STATUSES = %w[active inactive].freeze
-  CATEGORIES = %w[Health Creativity Learning Mindfulness].freeze
+  CATEGORIES = ["Health", "Creativity", "Learning", "Mindfulness", "Quit a bad habit", "Art",
+                "Sports", "Entertainment", "Social", "Finance", "Work", "Nutrition", "Home", "Outdoor"].freeze
   DAYS_OF_WEEK = %w[Monday Tuesday Wednesday Thursday Friday Saturday Sunday].freeze
 
   belongs_to :user
@@ -19,7 +20,7 @@ class Habit < ApplicationRecord
   validates :end_date, presence: true
   validates :frequency, inclusion: { in: FREQUENCIES }
   validates :status, inclusion: { in: STATUSES }
-  validates :category, inclusion: { in: %w[Health Creativity Learning Mindfulness] }
+  validates :category, inclusion: { in: CATEGORIES }
   # validates :days_of_week, inclusion: { in: %w[Monday Tuesday Wednesday Thursday Friday Saturday Sunday] }
 
 
