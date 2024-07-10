@@ -29,6 +29,11 @@
           <%= f.input :days_of_week, collection: Habit::DAYS_OF_WEEK, as: :select, input_html: { multiple: true }, label: false %>
         </div>
 
+        <div class="start-date-label-input">
+          <%= f.label :start_date, 'Start date', class: "habit-label-field" %>
+          <%= f.input :start_date, label: false %>
+        </div>
+
         <div class="end-date-label-input">
           <%= f.label :end_date, 'End date', class: "habit-label-field" %>
           <%= f.input :end_date, label: false %>
