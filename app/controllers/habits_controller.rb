@@ -1,8 +1,17 @@
 class HabitsController < ApplicationController
 
-    before_action :set_habit, only: [:edit, :update, :destroy]
+    before_action :set_habit, only: %i[edit update destroy end]
 
     def edit
+    end
+
+    def end
+      # end the habit
+      @habit.status = 'ended'
+      @habit.save
+      #delete future occurrences of habit
+      @habit.occurrences.where('date >= ? AND completion_status = ?', Date.today, 'pending').destroy_all
+      redirect_to habits_path, notice: 'Habit was successfully ended.'
     end
 
     def update

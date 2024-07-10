@@ -14,6 +14,9 @@ Rails.application.routes.draw do
     collection do
       get :filter_by_date
     end
+    member do
+      get :end, to: 'habits#end'
+    end
   end
   resources :habit_statics, only: %i[show]
 
