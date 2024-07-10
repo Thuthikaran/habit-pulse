@@ -62,3 +62,26 @@
 
   //border-width: 3px;
 }
+
+// flatpickr custom styling
+.flatpickr-day.today.custom-cursor-on-hover {
+  border-color: #670BFF;
+}
+
+.flatpickr-day.today.custom-cursor-on-hover:hover  {
+  border-color: #670BFF;
+  background: #670BFF;
+  color: #fff;
+}
+
+.flatpickr-day.selected.custom-cursor-on-hover {
+  border-color: #670BFF;
+  background: #670BFF;
+  color: #fff;
+}
+
+.flatpickr-day.selected.custom-cursor-on-hover:hover {
+  border-color: #670BFF;
+  background: #670BFF;
+  color: #fff;
+}
