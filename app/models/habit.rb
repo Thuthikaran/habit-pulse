@@ -8,8 +8,16 @@ class Habit < ApplicationRecord
   validates :name, presence: true, length: { minimum: 3, maximum: 50 }, uniqueness: { scope: :user_id }
   # restrict priority to 1-3
   validates :priority, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 3 }
+  validates :end_date, presence: true
+  validates :frequency, presence: true
+  # require days_of_week if frequency is weekly
+  validates :days_of_week, presence: true, if: :weekly?
+  validates :status, presence: true
+  validates :category, presence: true
+  validates :user, presence: true
   validates :start_date, presence: true
-  # validates :frequency, inclusion: { in: FREQUENCIES }
+  validates :end_date, presence: true
+  validates :frequency, inclusion: { in: FREQUENCIES }
   validates :status, inclusion: { in: STATUSES }
   validates :category, inclusion: { in: %w[Health Creativity Learning Mindfulness] }
   # validates :days_of_week, inclusion: { in: %w[Monday Tuesday Wednesday Thursday Friday Saturday Sunday] }
@@ -31,16 +39,23 @@ class Habit < ApplicationRecord
     occurrences.find_by(date: Date.today)
   end
 
+  # Check if habit is weekly
+  def weekly?
+    frequency == 'weekly'
+  end
+
   private
 
   def create_occurrences
-    end_date = self.end_date || self.start_date + 1.year
+    start_date = Date.today
+
     if self.frequency == 'daily'
-      (self.start_date..end_date).each do |date|
+      (start_date...(start_date + 1.months)).each do |date|
         Occurrence.create(date: date, habit: self)
       end
     elsif self.frequency == 'weekly'
-      (self.start_date..end_date).each do |date|
+      # days_of_week_array = days_of_week.map(&:to_s)
+      (start_date...(start_date + 6.months)).each do |date|
         if self.days_of_week.include?(date.strftime('%A'))
           Occurrence.create(date: date, habit: self)
         end
@@ -53,3 +68,15 @@ class Habit < ApplicationRecord
   end
 
 end
+
+# def create_occurrences(habit)
+#   # Calculate start date one week ago
+#   start_date = 1.week.ago.to_date
+
+#   rand(1..5).times do
+#     occurrence_date = Faker::Date.between(from: start_date, to: Date.today)
+#     occurrence = Occurrence.new(date: occurrence_date, habit: habit)
+#     occurrence.completion_status = Occurrence::COMPLETION_STATUSES.sample
+#     occurrence.save!
+#   end
+# end

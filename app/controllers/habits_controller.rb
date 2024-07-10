@@ -33,7 +33,6 @@ class HabitsController < ApplicationController
 
     @habit = Habit.new(habit_params)
     @habit.status = 'active'
-    @habit.frequency = 'daily'
     @habit.start_date = Date.today
     @habit.user = current_user
     @habit.priority = 1
