@@ -1,26 +1,34 @@
-<h2 class="mb-5 text-center"><%= @habit_static.habit.name %></h2>
+<h2 class="mb-5 text-center">Habit Record To Date</h2>
+<h3><%= @habit_static.habit.name %></h3>
 <p><%= @habit_static.habit.description %></p>
 <p>Started habit: <%= @habit_static.habit.start_date %></p>
 <div class="row g-3">
   <div class="col-md-6">
     <div class="border border-black p-3">
-      <div class="text-body-secundary">complete</div>
-      <h3> <%= @habit_static.completed_occurrences || 0 %> days</h3>
+      <div class="text-body-secundary">You've kept to this habit</div>
+      <h3> <%= @habit_static.completed_occurrences || 0 %> times</h3>
     </div>
   </div>
   <div class="col-md-6">
     <div class="border border-black p-3">
-      <div class="text-body-secundary">missed</div>
-      <h3> <%= @habit_static.missed_occurrences %> days</h3>
+      <div class="text-body-secundary">You didn't keep this habit</div>
+      <h3> <%= @habit_static.missed_occurrences %> times</h3>
     </div>
   </div>
   <div class="col-md-6">
     <div class="border border-black p-3">
-      <div class="text-body-secundary">total</div>
+      <div class="text-body-secundary">This has been a habit for</div>
       <h3> <%= @habit_static.total_occurrences %> days</h3>
     </div>
   </div>
 </div>
+<% if @habit %>
+  <div class="mt-4">
+    <p>Current streak: <%= @habit.current_streak %></p>
+    <p>Longest streak: <%= @habit.longest_streak %></p>
+  </div>
+<% end %>
+
 <% if @habit_static.total_occurrences.to_i > 0 %>
 <h3 class="text-center mt-5 m-3">Habit Score</h3>
 
