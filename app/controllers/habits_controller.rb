@@ -7,7 +7,7 @@ class HabitsController < ApplicationController
 
     def end
       # end the habit
-      @habit.status = 'ended'
+      @habit.end_date = Date.today
       @habit.save
       #delete future occurrences of habit
       @habit.occurrences.where('date >= ? AND completion_status = ?', Date.today, 'pending').destroy_all

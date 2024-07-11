@@ -31,10 +31,10 @@
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton<%= habit.id %>">
                   <li><%= link_to 'Edit', edit_habit_path(habit), class: "dropdown-item" %></li>
 
-                  <li><%= link_to 'End Habit', end_habit_path(habit), method: :patch,  class: "dropdown-item", :hidden => Date.today >= habit.end_date  ,
+                  <li><%= link_to 'End Habit', end_habit_path(habit), method: :patch,  class: "dropdown-item", :hidden => Date.today >= habit.end_date ,
                   data: { turbo_confirm: 'Are you sure you want to end this habit?' } %></li>
 
-                  <li><%= link_to "Delete",habit_path(habit),data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%></li>
+                  <li><%= link_to "Delete",habit_path(habit),data: {turbo_method: :delete, turbo_confirm: "Are you sure?"},  class: "dropdown-item"%></li>
                 </ul>
               </div>
             </div>

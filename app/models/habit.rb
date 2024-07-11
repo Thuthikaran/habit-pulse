@@ -47,6 +47,8 @@ class Habit < ApplicationRecord
   # callback to create a habit_statics record when a habit is created
   after_create :create_habit_statics
 
+
+
   # callback to create occurrences for a habit based on frequency, between start_date and end_date, if end_date is nil then it is set to 1 year from start_date
   after_create :create_occurrences
 
@@ -61,6 +63,11 @@ class Habit < ApplicationRecord
   # Check if habit is weekly
   def weekly?
     frequency == 'weekly'
+  end
+
+  # get user active habits count (habits that have future occurrences, includinbg today)
+  def self.active_habits_count(user)
+    user.habits.joins(:occurrences).where('date >= ? AND completion_status = ?', Date.today, 'pending').distinct.count
   end
 
   private
@@ -82,6 +89,10 @@ class Habit < ApplicationRecord
       end
     end
   end
+
+
+
+
 
   def delete_and_recreate_occurrences
 
