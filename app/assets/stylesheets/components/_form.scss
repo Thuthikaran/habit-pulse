@@ -1,0 +1,84 @@
+.create-form-container {
+  padding: 0px 60px;
+}
+.category-icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+
+  .category-icon {
+    padding: 4px;
+    height: 50px;
+    width: 50px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    text-align: center;
+    padding-top: 8px;
+    cursor: pointer;
+
+    &.selected {
+      background-color: #670BFF;
+      color: white;
+    }
+
+    i {
+      display: block;
+      font-size: 32px;
+    }
+
+
+  }
+}
+
+.icon-div {
+  text-align: center;
+  width: 50px;
+}
+
+.icon-div span {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 10px !important;
+}
+
+.days-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+
+  .day-pill {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #f8f9fa;
+    transition: background-color 0.3s ease;
+    font-size: 12px;
+
+    &.selected {
+      background-color: #670BFF;
+      color: white;
+    }
+  }
+}
+
+.frequency-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+
+  .frequency-pill {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f8f9fa;
+    transition: background-color 0.3s ease;
+    font-size: 12px;
+    cursor: pointer;
+
+    &.selected {
+      background-color: #670BFF;
+      color: white;
+    }
+  }
+}

@@ -55,10 +55,30 @@
   /* Optional: adjust spacing */
 }
 
+.btn-view:hover {
+  background: #670BFF;
+  color: white !important; 
+}
 
+// flatpickr custom styling
+.flatpickr-day.today.custom-cursor-on-hover {
+  border-color: #670BFF;
+}
 
+.flatpickr-day.today.custom-cursor-on-hover:hover  {
+  border-color: #670BFF;
+  background: #670BFF;
+  color: #fff;
+}
 
-.btn {
+.flatpickr-day.selected.custom-cursor-on-hover {
+  border-color: #670BFF;
+  background: #670BFF;
+  color: #fff;
+}
 
-  //border-width: 3px;
+.flatpickr-day.selected.custom-cursor-on-hover:hover {
+  border-color: #670BFF;
+  background: #670BFF;
+  color: #fff;
 }

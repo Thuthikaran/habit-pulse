@@ -1,0 +1,17 @@
+.trophy-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  border: 1px solid #5e15f5;
+  overflow: hidden;
+  background-color: #ffffff;
+}
+
+.trophy {
+  height: 60%;
+  width: 60%;
+  object-fit: cover;
+}
