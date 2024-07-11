@@ -38,15 +38,17 @@
               </div>
             <% end %>
 
-            <div class="trophy-container">
-              <% if Habit.percentage_completed_today_for_user(current_user) == 100 %> 
-                <%= image_tag "gold.png", class: "trophy", alt: "Gold trophy" %>
-              <% elsif Habit.percentage_completed_today_for_user(current_user) >= 80 %>
-                <%= image_tag "silver.png", class: "trophy", alt: "Gold trophy" %>
-              <% elsif Habit.percentage_completed_today_for_user(current_user) >= 50 %>
-                <%= image_tag "bronze.png", class: "trophy", alt: "Gold trophy" %>
-              <% end %>
-            </div>
+            <% if Habit.percentage_completed_today_for_user(current_user) >= 50 %>
+              <div class="trophy-container">
+                <% if Habit.percentage_completed_today_for_user(current_user) == 100 %> 
+                  <%= image_tag "gold.png", class: "trophy", alt: "Gold trophy" %>
+                <% elsif Habit.percentage_completed_today_for_user(current_user) >= 80 %>
+                  <%= image_tag "silver.png", class: "trophy", alt: "Gold trophy" %>
+                <% elsif Habit.percentage_completed_today_for_user(current_user) >= 50 %>
+                  <%= image_tag "bronze.png", class: "trophy", alt: "Gold trophy" %>
+                <% end %>
+              </div>
+            <% end %>
 
             <p>
               <p class="label">Today's habit completion</p>

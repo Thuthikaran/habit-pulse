@@ -49,23 +49,30 @@ if Rails.env.development?
             user_id: user.id
           )
         )
-        # create_occurrences(habit)
+
+      habit.occurrences.each do |occurrence|
+        next if occurrence.date > Date.today
+
+        if occurrence.date == Date.today
+          occurrence.update(completion_status: 'pending')
+        elsif occurrence.date < Date.today
+          status = ['completed', 'pending'].sample
+          occurrence.update(completion_status: status)
+        end
+      end
+
+      total_occurrences = habit.occurrences.where('date <= ?', Date.today).count
+      completed_occurrences = habit.occurrences.where('date <= ? AND completion_status = ?', Date.today, 'completed').count
+      missed_occurrences = habit.occurrences.where('date <= ? AND completion_status = ?', Date.today, 'pending').count
+
+      habit.habit_static.update(
+        total_occurrences: total_occurrences,
+        completed_occurrences: completed_occurrences,
+        missed_occurrences: missed_occurrences
+      )
       end
     end
   end
 
   puts 'Seeding completed!'
 end
-
-
-# def create_occurrences(habit)
-#   # Calculate start date one week ago
-#   start_date = 1.week.ago.to_date
-
-#   rand(1..5).times do
-#     occurrence_date = Faker::Date.between(from: start_date, to: Date.today)
-#     occurrence = Occurrence.new(date: occurrence_date, habit: habit)
-#     occurrence.completion_status = Occurrence::COMPLETION_STATUSES.sample
-#     occurrence.save!
-#   end
-# end

@@ -3,6 +3,7 @@ class HabitStaticsController < ApplicationController
 
   def show
     @habit_static = HabitStatic.find(params[:id])
+    @habit = @habit_static.habit
   end
 
   private

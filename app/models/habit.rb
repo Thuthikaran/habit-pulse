@@ -63,6 +63,42 @@ class Habit < ApplicationRecord
     frequency == 'weekly'
   end
 
+  def current_streak
+    current_streak = 0
+    occurrences.where('date <= ?', Date.today).order(date: :asc).each do |occurrence|
+      if occurrence.completion_status == 'completed'
+        current_streak += 1
+        puts "Streak incremented: #{current_streak}"
+      elsif occurrence.date == Date.today && occurrence.completion_status != 'completed'
+        next
+      elsif occurrence.date == Date.today && occurrence.completion_status == 'completed'
+        current_streak += 1
+        puts "Today completed: #{current_streak}"
+      elsif occurrence.completion_status != 'completed'
+        puts "Streak broken: #{current_streak} days"
+        current_streak = 0
+      end
+    end
+    current_streak
+  end
+
+
+  def longest_streak
+    current_streak = 0
+    longest_streak = 0
+
+    occurrences.order(date: :asc).each do |occurrence|
+      if occurrence.completion_status == 'completed'
+        current_streak += 1
+        longest_streak = [longest_streak, current_streak].max
+      else
+        current_streak = 0
+      end
+    end
+
+    longest_streak
+  end
+
   private
 
   def create_occurrences
@@ -112,4 +148,6 @@ class Habit < ApplicationRecord
 
     (completed_habits.to_f / total_habits.to_f * 100).to_i
   end
+
+
 end
