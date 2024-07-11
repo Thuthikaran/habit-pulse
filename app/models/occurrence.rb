@@ -5,6 +5,8 @@ class Occurrence < ApplicationRecord
   validates :date, presence: true
   validates :habit_id, presence: true
   validates :completion_status, inclusion: { in: COMPLETION_STATUSES }
+  # validates uniqueness of date scoped to habit
+  validates :date, uniqueness: { scope: :habit_id }
 
   has_one :habit_static, through: :habit
 

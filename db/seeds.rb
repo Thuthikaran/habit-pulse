@@ -1,3 +1,16 @@
+def create_occurrences(habit)
+  # Calculate start date one week ago
+  start_date = 1.week.ago.to_date
+
+  rand(1..5).times do
+    occurrence_date = Faker::Date.between(from: start_date, to: Date.today)
+    # create or update occurrence by date and habit
+    occurrence = habit.occurrences.find_or_initialize_by(date: occurrence_date)
+    occurrence.completion_status = Occurrence::COMPLETION_STATUSES.sample
+    occurrence.save!
+  end
+end
+
 if Rails.env.development?
   Habit.transaction do
     puts 'Destroying all existing habits, occurrences, and users...'
@@ -49,23 +62,10 @@ if Rails.env.development?
             user_id: user.id
           )
         )
-        # create_occurrences(habit)
+        create_occurrences(habit)
       end
     end
   end
 
   puts 'Seeding completed!'
 end
-
-
-# def create_occurrences(habit)
-#   # Calculate start date one week ago
-#   start_date = 1.week.ago.to_date
-
-#   rand(1..5).times do
-#     occurrence_date = Faker::Date.between(from: start_date, to: Date.today)
-#     occurrence = Occurrence.new(date: occurrence_date, habit: habit)
-#     occurrence.completion_status = Occurrence::COMPLETION_STATUSES.sample
-#     occurrence.save!
-#   end
-# end
