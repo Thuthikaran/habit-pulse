@@ -70,6 +70,12 @@ class Habit < ApplicationRecord
     user.habits.joins(:occurrences).where('date >= ? AND completion_status = ?', Date.today, 'pending').distinct.count
   end
 
+  # check if habit ended
+  def ended?
+    end_date <= Date.today
+  end
+
+
   private
 
   def create_occurrences
