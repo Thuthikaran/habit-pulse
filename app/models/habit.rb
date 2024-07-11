@@ -107,7 +107,6 @@ class Habit < ApplicationRecord
   def self.percentage_completed_today_for_user(user)
     total_habits = total_today_for_user(user)
     completed_habits = completed_today
-
     return 0 if total_habits == 0
 
     (completed_habits.to_f / total_habits.to_f * 100).to_i
