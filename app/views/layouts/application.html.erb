@@ -37,16 +37,23 @@
                 <%= "#{current_user.first_name} #{current_user.last_name}" %>
               </div>
             <% end %>
+
+            <div class="trophy-container">
+              <% if Habit.percentage_completed_today_for_user(current_user) == 100 %> 
+                <%= image_tag "gold.png", class: "trophy", alt: "Gold trophy" %>
+              <% elsif Habit.percentage_completed_today_for_user(current_user) >= 80 %>
+                <%= image_tag "silver.png", class: "trophy", alt: "Gold trophy" %>
+              <% elsif Habit.percentage_completed_today_for_user(current_user) >= 50 %>
+                <%= image_tag "bronze.png", class: "trophy", alt: "Gold trophy" %>
+              <% end %>
+            </div>
+
             <p>
-              <span class="label">Your progress: </span>
-              <span class="user-progress">744/744</span>
-            </p>
-            <p>
-              <span class="label">Completion rate: </span>
-              <span>100% 🏆</span>
+              <p class="label">Today's habit completion</p>
+              <span class="user-progress"><%= Habit.percentage_completed_today_for_user(current_user) %>%</span>
             </p>
 
-            <div class="mt-5">
+            <div class="mt-4">
               <%= link_to "Create a habit", new_habit_path, class: "btn btn-primary px-4 py-2 rounded", style: "background-color: #670BFF; transition: background 0.3s ease;" %>
             </div>
             <% if controller_name == 'habits' && action_name == 'index' %>
@@ -83,5 +90,6 @@
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/js/all.min.js"></script>
+  <%= javascript_include_tag 'progressRing' %> 
 </body>
 </html>

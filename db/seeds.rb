@@ -29,11 +29,11 @@ if Rails.env.development?
 
     # Define the 5 habits
     habits = [
-      { name: 'Meditate', category: 'Mindfulness' },
-      { name: 'Exercise', category: 'Health' },
-      { name: 'Learn', category: 'Learning' },
-      { name: 'Write', category: 'Creativity' },
-      { name: 'Cook', category: 'Health' }
+      { name: 'Drink two litres of water every day', category: 'Health' },
+      { name: 'Eat my five a day', category: 'Nutrition' },
+      { name: 'Meditate for twenty minutes', category: 'Mindfulness' },
+      { name: 'Go for a walk', category: 'Outdoor' },
+      { name: 'Quit smoking', category: 'Quit a bad habit' }
     ]
 
     # Create habits for each user
@@ -43,6 +43,7 @@ if Rails.env.development?
           habit_attrs.merge(
             priority: rand(1..3),
             start_date: 1.week.ago.to_date,  # Start date one week ago
+            end_date: 1.week.from_now.to_date,  # End date one week from now
             frequency: 'daily',
             status: 'active',
             user_id: user.id

@@ -15,7 +15,6 @@
         <div class="percentage-value" id="percentageValue" data-percentage="<%= @completion_percentage %>">%</div>
       </div>
     </div>
-    <%= javascript_include_tag 'progressRing' %>
   <% else %>
     <div>
     <%= link_to new_habit_path, class: "text-decoration-none fs-5 pt-3 link-create-habit" do %>
@@ -27,3 +26,5 @@
     </div>
   <% end %>
 </div>
+
+<%= javascript_include_tag 'progressRing' %>
