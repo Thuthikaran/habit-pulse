@@ -152,8 +152,8 @@ class Habit < ApplicationRecord
     HabitStatic.create(habit_id: self.id)
   end
 
-  def self.completed_today
-    joins(:occurrences).where(occurrences: { date: Date.today, completion_status: 'completed' }).distinct.count
+  def self.completed_today_for_user(user)
+    joins(:occurrences).where(user: user, occurrences: { date: Date.today, completion_status: 'completed' }).distinct.count
   end
 
   def self.total_today_for_user(user)
@@ -162,7 +162,7 @@ class Habit < ApplicationRecord
 
   def self.percentage_completed_today_for_user(user)
     total_habits = total_today_for_user(user)
-    completed_habits = completed_today
+    completed_habits = completed_today_for_user(user)
 
     return 0 if total_habits == 0
 

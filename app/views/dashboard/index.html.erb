@@ -2,20 +2,20 @@
 <div class="container container-dashboard">
   <h1>Welcome, <%= current_user.first_name %></h1>
   <% if current_user.habits.count > 0 %>
-    <p class="text-active-habits fs-5">You have <%= Habit.active_habits_count(current_user) %>
-    active habits</p>
-    <div class="scoreboard">
-      <h2>Today's Habit Completion</h2>
-      <p>Completed: <%= @completed_habits_today %> out of <%= @current_habit_total %> habits</p>
-      <p>Completion Percentage: <%= @completion_percentage %>%</p>
-      <link rel="stylesheet" href="style.css">
-    </div>
-
-    <div class="percentage-ring-container">
-      <div class="percentage-ring" id="percentageRing">
-        <div class="percentage-value" id="percentageValue" data-percentage="<%= @completion_percentage %>">%</div>
+    <p class="text-active-habits fs-5">You are currently tracking <%= Habit.total_today_for_user(current_user) %> habits</p>
+    
+    <h2 class="mt-5">Today's Progress</h2>
+    <div class="d-flex flex-column align-items-center justify-content-center">
+      <div style="color: #24e56d">
+        <i class="fa-regular fa-circle-check fa-6x"></i>
       </div>
+      <p class="mt-2 text-active-habits fs-5">
+        <%= Habit.completed_today_for_user(current_user) %> habits completed
+      <p>
     </div>
+    <%= link_to habits_path, class: "text-decoration-none fs-5 pt-3 link-create-habit" do %>
+      <i class="fa fa-plus me-2"></i> <span>Go to habits</span>
+    <% end %>
   <% else %>
     <div>
     <%= link_to new_habit_path, class: "text-decoration-none fs-5 pt-3 link-create-habit" do %>
