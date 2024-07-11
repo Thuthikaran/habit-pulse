@@ -18,21 +18,31 @@
               <small class="text-body-secondary"><%= habit.category %></small>
             </div>
             <div class="d-flex align-items-center">
-              <span class="me-2">Have you completed this habit today?</span>
-              <% if habit.today_occurrence.completion_status == 'completed' %>
-                <button class="btn btn-outline-primary complete-btn mr-2" disabled data-habit-id="<%= habit.id %>">Completed</button>
-              <% elsif habit.today_occurrence.completion_status == 'pending' %>
-                <%= link_to 'Complete' ,complete_habit_path(habit.today_occurrence.id) ,method: 'patch' %>
+
+              <% if habit.ended? %>
+                <span class="me-2">You have ended this habit</span>
+              <% else %>
+                <span class="me-2">Have you completed this habit today?</span>
+                <% if habit.today_occurrence.completion_status == 'completed' %>
+                  <button class="btn btn-outline-primary complete-btn mr-2" disabled data-habit-id="<%= habit.id %>">Completed</button>
+                <% elsif habit.today_occurrence.completion_status == 'pending' %>
+                  <%= link_to 'Complete' ,complete_habit_path(habit.today_occurrence.id) ,method: 'patch' %>
+                <% end %>
               <% end %>
-             <div class="dropdown ms-2">
+
+             <%= content_tag :div, class: 'dropdown ms-2', hidden: habit.ended? do %>
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton<%= habit.id %>" data-bs-toggle="dropdown" aria-expanded="false">
                   Actions
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton<%= habit.id %>">
                   <li><%= link_to 'Edit', edit_habit_path(habit), class: "dropdown-item" %></li>
-                  <li><%= link_to "Delete",habit_path(habit),data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%></li>
+
+                  <li><%= link_to 'End Habit', end_habit_path(habit), method: :patch,  class: "dropdown-item", :hidden => Date.today >= habit.end_date ,
+                  data: { turbo_confirm: 'Are you sure you want to end this habit?' } %></li>
+
+                  <li><%= link_to "Delete",habit_path(habit),data: {turbo_method: :delete, turbo_confirm: "Are you sure?"},  class: "dropdown-item"%></li>
                 </ul>
-              </div>
+              <% end %>
             </div>
           </div>
         </div>
