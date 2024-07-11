@@ -1,3 +1,4 @@
+require "open-uri"
 
 Habit.transaction do
   puts 'Destroying all existing habits, occurrences, and users...'
@@ -15,14 +16,25 @@ Habit.transaction do
     { email: "thuthi@mail.com", first_name: 'Thuthikaran', last_name: 'Easvaran' },
     { email: "sahba@mail.com", first_name: 'Sahba', last_name: 'Azhari' },
     { email: "jeannine@mail.com", first_name: 'Jeannine', last_name: 'Vernon' },
-    { email: "markcarson121@gmail.com", first_name: 'Mark', last_name: 'Carson' }
+    { email: "markcarson121@gmail.com", first_name: 'Mark', last_name: 'Carson' } ,
+    { email: "jessica@mail.com", first_name: 'Jessica', last_name: 'Carvalho' }
+  ]
+  attachments = [
+    { io: URI.open('https://avatars.githubusercontent.com/u/13469222?v=4'), filename: '13469222.JPG', content_type: 'image/jpg' },
+    { io: URI.open('https://avatars.githubusercontent.com/u/86117226?v=4'), filename: '86117226.JPG', content_type: 'image/jpg' },
+    { io: URI.open('https://avatars.githubusercontent.com/u/105825256?v=4'), filename: '105825256.JPG', content_type: 'image/jpg' },
+    { io: URI.open('https://avatars.githubusercontent.com/u/154748078?v=4'), filename: '154748078.JPG', content_type: 'image/jpg' },
+    { io: URI.open('https://avatars.githubusercontent.com/u/74406984?v=4'), filename: '74406984.png', content_type: 'image/png' },
+    { io: URI.open('https://avatars.githubusercontent.com/u/68972820?v=4'), filename: '68972820.JPG', content_type: 'image/jpg' }
   ]
 
-  users.each do |user_attrs|
-    User.create!(user_attrs.merge(
+  users.each_with_index do |user_attrs, index|
+    user = User.create!(user_attrs.merge(
       password: 'password',
       password_confirmation: 'password'
     ))
+    user.photo.attach(attachments[index])
+    user.save!
   end
 
   puts 'Creating habits...'
