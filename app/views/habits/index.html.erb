@@ -31,8 +31,7 @@
               <% end %>
 
              <%= content_tag :div, class: 'dropdown ms-2', hidden: habit.ended? do %>
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton<%= habit.id %>" data-bs-toggle="dropdown" aria-expanded="false">
-                  Actions
+                <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton<%= habit.id %>" data-bs-toggle="dropdown" aria-expanded="false">
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton<%= habit.id %>">
                   <li><%= link_to 'Edit', edit_habit_path(habit), class: "dropdown-item" %></li>
