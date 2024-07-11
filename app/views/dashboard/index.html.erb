@@ -4,18 +4,6 @@
   <% if current_user.habits.count > 0 %>
     <p class="text-active-habits fs-5">You have <%= Habit.active_habits_count(current_user) %>
     active habits</p>
-    <div class="scoreboard">
-      <h2>Today's Habit Completion</h2>
-      <p>Completed: <%= @completed_habits_today %> out of <%= @current_habit_total %> habits</p>
-      <p>Completion Percentage: <%= @completion_percentage %>%</p>
-      <link rel="stylesheet" href="style.css">
-    </div>
-
-    <div class="percentage-ring-container">
-      <div class="percentage-ring" id="percentageRing">
-        <div class="percentage-value" id="percentageValue" data-percentage="<%= @completion_percentage %>">%</div>
-      </div>
-    </div>
   <% else %>
     <div>
     <%= link_to new_habit_path, class: "text-decoration-none fs-5 pt-3 link-create-habit" do %>
