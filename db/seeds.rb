@@ -45,16 +45,19 @@ Habit.transaction do
     { name: 'Eat my five a day', category: 'Nutrition' },
     { name: 'Meditate for twenty minutes', category: 'Mindfulness' },
     { name: 'Go for a walk', category: 'Outdoor' },
-    { name: 'Quit smoking', category: 'Quit a bad habit' }
+    { name: 'Quit smoking', category: 'Quit a bad habit' },
+    { name: '5 km run under 30 minutes', category: 'Sports' }
   ]
 
   # Create habits for each user
   User.all.each do |user|
     habits.each do |habit_attrs|
+      next if user.first_name != 'Thuthikaran' && habit_attrs[:name] == '5 km run under 30 minutes'
+
       habit = Habit.create!(
         habit_attrs.merge(
           priority: rand(1..3),
-          start_date: 1.week.ago.to_date,  # Start date one week ago
+          start_date: habit_attrs[:name] == '5 km run under 30 minutes' ? Date.new(2024, 6, 1) : 1.week.ago.to_date,  # Start date one week ago
           end_date: 1.week.from_now.to_date,  # End date one week from now
           frequency: 'daily',
           status: 'active',
@@ -85,5 +88,6 @@ Habit.transaction do
     end
   end
 end
+
 
 puts 'Seeding completed!'

@@ -1,37 +1,37 @@
 class HabitsController < ApplicationController
 
-    before_action :set_habit, only: %i[edit update destroy end]
+  before_action :set_habit, only: %i[edit update destroy end]
 
-    def edit
+  def edit
+  end
+
+  def end
+    # end the habit
+    @habit.end_date = Date.today
+    @habit.save
+    #delete future occurrences of habit
+    @habit.occurrences.where('date >= ? AND completion_status = ?', Date.today, 'pending').destroy_all
+    redirect_to habits_path, notice: 'Habit was successfully ended.'
+  end
+
+  def update
+
+    if @habit.update(habit_params)
+      redirect_to habits_path, notice: 'Habit was successfully updated.'
+    else
+      render :edit
     end
+  end
 
-    def end
-      # end the habit
-      @habit.end_date = Date.today
-      @habit.save
-      #delete future occurrences of habit
-      @habit.occurrences.where('date >= ? AND completion_status = ?', Date.today, 'pending').destroy_all
-      redirect_to habits_path, notice: 'Habit was successfully ended.'
-    end
-
-    def update
-
-      if @habit.update(habit_params)
-        redirect_to habits_path, notice: 'Habit was successfully updated.'
-      else
-        render :edit
-      end
-    end
-
-    def destroy
-      @habit.destroy
-      redirect_to habits_path, notice: 'Habit was successfully destroyed.'
-    end
+  def destroy
+    @habit.destroy
+    redirect_to habits_path, notice: 'Habit was successfully destroyed.'
+  end
 
   def index
-    # get habits that have occurrences for today
-    # renamed this to today_occurrences for clarification!
+    # get habits that have occurrences for today and order by occurrence completion status descending
     @habits = current_user.habits.select { |habit| habit.today_occurrence.present? }
+    @habits = @habits.sort_by { |habit| habit.occurrences.find_by(date: Date.today).completion_status }.reverse
   end
 
   def new
