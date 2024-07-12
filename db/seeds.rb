@@ -1,5 +1,17 @@
 require "open-uri"
 
+def get_start_date(habit, index)
+  if [5,6].include?(index)
+    Date.new(2024, 6, 1)
+  elsif index == 7
+    Date.new(2024, 6, 10)
+  elsif index == 8
+    Date.new(2024, 6, 13)
+  else
+    1.week.ago.to_date
+  end
+end
+
 Habit.transaction do
   puts 'Destroying all existing habits, occurrences, and users...'
 
@@ -46,24 +58,30 @@ Habit.transaction do
     { name: 'Meditate for twenty minutes', category: 'Mindfulness' },
     { name: 'Go for a walk', category: 'Outdoor' },
     { name: 'Quit smoking', category: 'Quit a bad habit' },
-    { name: '5 km run under 30 minutes', category: 'Sports' }
+    { name: '5 km run under 30 minutes', category: 'Sports' },
+    { name: 'Make the bed first thing in the morning', category: 'Home' },
+    { name: 'Reading a chapter', category: 'Learning' },
+    { name: 'Incremental Push Ups', category: 'Sports' }
   ]
 
   # Create habits for each user
   User.all.each do |user|
-    habits.each do |habit_attrs|
-      next if user.first_name != 'Thuthikaran' && habit_attrs[:name] == '5 km run under 30 minutes'
+    habits.each_with_index do |habit_attrs, index|
+      next if user.first_name != 'Thuthikaran' && [5,6,7,8].include?(index)
 
       habit = Habit.create!(
         habit_attrs.merge(
           priority: rand(1..3),
-          start_date: habit_attrs[:name] == '5 km run under 30 minutes' ? Date.new(2024, 6, 1) : 1.week.ago.to_date,  # Start date one week ago
-          end_date: 1.week.from_now.to_date,  # End date one week from now
+          start_date: get_start_date(habit, index),  # Start date one week ago
+          end_date: index == 8 ? Date.new(2024, 7, 13) : 1.week.from_now.to_date, # End date one week from now
           frequency: 'daily',
           status: 'active',
           user_id: user.id
         )
       )
+
+
+
 
     habit.occurrences.each do |occurrence|
       next if occurrence.date > Date.today
@@ -71,7 +89,11 @@ Habit.transaction do
       if occurrence.date == Date.today
         occurrence.update(completion_status: 'pending')
       elsif occurrence.date < Date.today
-        status = ['completed', 'pending'].sample
+        if index == 6
+          status = 'completed'
+        else
+          status = ['completed', 'pending'].sample
+        end
         occurrence.update(completion_status: status)
       end
     end
