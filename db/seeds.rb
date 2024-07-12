@@ -12,6 +12,16 @@ def get_start_date(habit, index)
   end
 end
 
+def get_description(index)
+    if index == 8
+      "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29"
+    elsif index == 5
+      "5 kilometers in under 30 minutes requires maintaining a pace of around 6 minutes per kilometer, combining speed and endurance effectively."
+    else
+      ''
+    end
+end
+
 Habit.transaction do
   puts 'Destroying all existing habits, occurrences, and users...'
 
@@ -73,10 +83,12 @@ Habit.transaction do
         habit_attrs.merge(
           priority: rand(1..3),
           start_date: get_start_date(habit, index),  # Start date one week ago
-          end_date: index == 8 ? Date.new(2024, 7, 13) : 1.week.from_now.to_date, # End date one week from now
-          frequency: 'daily',
+          end_date: index == 9 ? Date.new(2024, 7, 13) : 1.week.from_now.to_date, # End date one week from now
+          frequency: index == 5 ? "weekly" : "daily",
+          days_of_week: index == 5 ?  ["Monday", "Wednesday", "Saturday"] : %w[Monday Tuesday Wednesday Thursday Friday Saturday Sunday],
           status: 'active',
-          user_id: user.id
+          user_id: user.id,
+          description: get_description(index)
         )
       )
 
@@ -89,7 +101,7 @@ Habit.transaction do
       if occurrence.date == Date.today
         occurrence.update(completion_status: 'pending')
       elsif occurrence.date < Date.today
-        if index == 6
+        if [6,8].include?(index)
           status = 'completed'
         else
           status = ['completed', 'pending'].sample
