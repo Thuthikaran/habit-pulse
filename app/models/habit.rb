@@ -141,11 +141,11 @@ class Habit < ApplicationRecord
 
   def delete_and_recreate_occurrences
 
-    if self.saved_change_to_frequency || self.saved_change_to_days_of_week
-
-      self.occurrences.where('date >= ? AND completion_status = ?', Date.today, 'pending').destroy_all
-      create_occurrences
-    end
+    # if self.saved_change_to_frequency || self.saved_change_to_days_of_week
+    #   raise
+    #   self.occurrences.where('date >= ? AND completion_status = ?', Date.today, 'pending').destroy_all
+    #   create_occurrences
+    # end
   end
 
   def create_habit_statics
