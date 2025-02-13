@@ -1,7 +1,7 @@
 # Habit Pulse
 
-A habit tracking app created to track habits.
+An habit tracking app created to track habits.
 
-![Habit Pulse Logo](https://raw.githubusercontent.com/Thuthikaran/habit-pulse/master/app/assets/images/logo.svg)
+![Screenshot](https://private-user-images.githubusercontent.com/86117226/412676836-5c6a7b8a-cb8e-4ffd-b0d0-a2c172490e62.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3Mzk0MTA1MDUsIm5iZiI6MTczOTQxMDIwNSwicGF0aCI6Ii84NjExNzIyNi80MTI2NzY4MzYtNWM2YTdiOGEtY2I4ZS00ZmZkLWIwZDAtYTJjMTcyNDkwZTYyLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTAyMTMlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwMjEzVDAxMzAwNVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWU4NDUyZTBkYzEzOTUwNmMyMTZjNzkyYmJhZmM3MDk0NWExOWQzMmRmM2RmMDQzNjg3NDA2YzNmNjBmYWZjM2MmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.QJzGYoEt98a6iTd23JyAoGyzddgRt06LgBZ0otQfZ5g)
 
 **Deployed at:** [https://www.habit-pulse.me/dashboard](https://www.habit-pulse.me/dashboard)
