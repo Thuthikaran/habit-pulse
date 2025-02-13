@@ -1,6 +1,7 @@
 # HabitPulse 
 
-![Screenshot](./images/tmdb.png)
+![Screenshot](./images/logo.svg)
+
 
 **Deployed at:** [https://www.habit-pulse.me/dashboard](https://www.habit-pulse.me/dashboard)
 
